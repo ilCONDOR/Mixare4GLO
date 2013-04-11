@@ -54,6 +54,7 @@
         <editable>false</editable>
         <blur>0</blur>
     </datasource>-->
+   
      <datasource id="0" >
         <name>GLO</name>
 		<url>http://glo.inf.unibz.it/cgi-bin/mapserv</url>
