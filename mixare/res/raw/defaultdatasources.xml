@@ -60,7 +60,7 @@
 		<type>0</type>
         <display>0</display>
         <visible>true</visible>
-        <editable>true</editable>
+        <editable>false</editable>
         <blur>0</blur>
     </datasource>
     <datasource id="1" >
