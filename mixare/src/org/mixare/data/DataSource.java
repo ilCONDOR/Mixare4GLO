@@ -231,7 +231,7 @@ public class DataSource {
 			ret = Color.GREEN;
 			break;
 		default:
-			ret = Color.RED;
+			ret = Color.GREEN;
 			break;
 		}
 		return ret;

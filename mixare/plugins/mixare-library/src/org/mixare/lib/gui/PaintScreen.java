@@ -108,7 +108,7 @@ public class PaintScreen implements Parcelable, GLSurfaceView.Renderer {
 
 		try {
 			// Load default models
-			InputStream in = ((Context) app).getAssets().open("poi2.obj");
+			InputStream in = ((Context) app).getAssets().open("marker.obj");           // .obj created with Blender software
 			InputStream in2 = ((Context) app).getAssets().open("triangle2.obj");
 			InputStream in3 = ((Context) app).getAssets().open("arrow3.obj");
 
@@ -846,10 +846,9 @@ public class PaintScreen implements Parcelable, GLSurfaceView.Renderer {
 				Model3D circleModel = new Model3D();
 
 				circleModel.setDistance(90); 
-				circleModel.setRadius(10000000);        // the size of the circles
-				circleModel.setSchaal(20);
+				//circleModel.setSchaal(20);                 // movement of the circle on the same axis
 				circleModel.setObj(id);
-				circleModel.setColor(0x00FF00);  // green
+				circleModel.setColor(0x00FF00);  		  // green
 				circleModel.setxPos(x);
 				circleModel.setyPos(y);
 				paint3DModel(circleModel);

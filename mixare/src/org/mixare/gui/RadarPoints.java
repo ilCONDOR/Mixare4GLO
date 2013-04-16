@@ -42,7 +42,7 @@ public class RadarPoints implements ScreenObj {
 	/** Position on screen */
 	static float originX = 0, originY = 0;
 	/** Color */
-	static int radarColor = Color.argb(100, 0, 256, 0);
+	static int radarColor = Color.argb(0, 256, 0, 0);
 
 	public void paint(PaintScreen dw) {
 		/** radius is in KM. */

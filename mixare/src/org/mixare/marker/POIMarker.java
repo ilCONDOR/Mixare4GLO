@@ -80,9 +80,9 @@ public class POIMarker extends LocalMarker {
 					maxHeight / 25f);
 
 			 // distance 100 is the threshold to convert from circle to another shape
-			if (distance < 100.0)
-				otherShape(dw);
-			else
+			//if (distance < 100.0)
+				//otherShape(dw);
+			//else
 				dw.paintCircle(getID() + "poi", cMarker.x, cMarker.y, (float) radius);
 		}
 	}

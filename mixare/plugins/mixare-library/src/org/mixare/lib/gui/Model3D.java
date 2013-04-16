@@ -29,7 +29,7 @@ public class Model3D implements Parcelable {
 		}
 
 		public Model3D[] newArray(int size) {
-			return new Model3D[size];
+			return new Model3D[size];   
 		}
 	};
 
