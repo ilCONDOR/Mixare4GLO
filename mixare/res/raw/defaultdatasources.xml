@@ -54,7 +54,7 @@
         <editable>false</editable>
         <blur>0</blur>
     </datasource>-->
-     <datasource id="0" >
+    <!-- <datasource id="1" >
         <name>GLO</name>
 		<url>http://glo.inf.unibz.it/cgi-bin/mapserv</url>
 		<type>0</type>
@@ -62,8 +62,8 @@
         <visible>true</visible>
         <editable>false</editable>
         <blur>0</blur>
-    </datasource>
-    <!--<datasource id="1" >
+    </datasource>-->
+    <datasource id="0" >
         <name>altervista</name>
 		<url>http://g3r4.altervista.org/result_ok.gml</url>
 		<type>1</type>
@@ -71,5 +71,5 @@
         <visible>true</visible>
         <editable>false</editable>
         <blur>0</blur>
-    </datasource> -->
+    </datasource> 
 </datasources>
