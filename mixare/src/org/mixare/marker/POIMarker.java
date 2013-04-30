@@ -125,7 +125,7 @@ public class POIMarker extends LocalMarker {
 		// dw.setFill(true);
 		if (isVisible) {
 			dw.paintText3D(textStr, getURL(), new PointF(signMarker.x, signMarker.y
-					+ maxHeight), currentAngle + 90);
+					+ maxHeight), currentAngle + 90);    
 		}
 		// dw.paintObj(txtLab, signMarker.x - txtLab.getWidth() / 2,
 		// signMarker.y + maxHeight, currentAngle + 90, 1);

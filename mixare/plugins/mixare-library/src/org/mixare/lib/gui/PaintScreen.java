@@ -156,7 +156,7 @@ public class PaintScreen implements Parcelable, GLSurfaceView.Renderer {
 
 	public PaintScreen(Parcel in) {
 		readFromParcel(in);
-		paint.setTextSize(16);
+		paint.setTextSize(32);   // does work???
 		paint.setAntiAlias(true);
 		paint.setColor(Color.BLUE);
 		paint.setStyle(Paint.Style.STROKE);
@@ -278,11 +278,11 @@ public class PaintScreen implements Parcelable, GLSurfaceView.Renderer {
 				text.end();
 			}
 
-			textInfo.begin();
-			textInfo.draw(info + " FPS : " + (1000 / dt) + " size : " + size
-					+ " kb", (mWidth - (getTextWidth(info) + 210)), mHeight
-					- (mHeight - 100));
-			textInfo.end();
+			//textInfo.begin();
+			//textInfo.draw(info + " FPS : " + (1000 / dt) + " size : " + size
+					//+ " kb", (mWidth - (getTextWidth(info) + 210)), mHeight
+					//- (mHeight - 100));
+			//textInfo.end();
 
 			// Android's Canvas cannot handle multi threading, so we cannot draw
 			// it via the DataView's thread.
@@ -764,7 +764,7 @@ public class PaintScreen implements Parcelable, GLSurfaceView.Renderer {
 		textInfo = new GLText(gl, ((Context) app).getAssets());
 
 		textInfo.load("Roboto-Regular.ttf", 14, 2, 2);
-		text.load("Roboto-Regular.ttf", 30, 2, 2);
+		text.load("Roboto-Regular.ttf", 15, 2, 2);           						// dimension of 3D text
 
 		String extensions = gl.glGetString(GL10.GL_EXTENSIONS);
 		String version = gl.glGetString(GL10.GL_VERSION);
@@ -846,7 +846,7 @@ public class PaintScreen implements Parcelable, GLSurfaceView.Renderer {
 				Model3D circleModel = new Model3D();
 
 				circleModel.setDistance(90); 
-				//circleModel.setSchaal(20);                 // movement of the circle on the same axis
+				circleModel.setSchaal(20);                 // movement of the circle on the same axis
 				circleModel.setObj(id);
 				circleModel.setColor(0x00FF00);  		  // green
 				circleModel.setxPos(x);

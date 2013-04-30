@@ -313,8 +313,8 @@ public class GLText {
 												// Height
 		float chrWidth = cellWidth * scaleX; // Calculate Scaled Character Width
 		int len = text.length(); // Get String Length
-		x += (chrWidth / 2.0f) - (fontPadX * scaleX); // Adjust Start X
-		y += (chrHeight / 2.0f) - (fontPadY * scaleY); // Adjust Start Y
+		x += (chrWidth / 0.75f) - (fontPadX * scaleX); 													// Adjust Start X modified divide factor for smaller text
+		y += (chrHeight / 0.75f) - (fontPadY * scaleY); 												// Adjust Start Y modified divide factor for smaller text
 		for (int i = 0; i < len; i++) { // FOR Each Character in String
 			int c = (int) text.charAt(i) - CHAR_START; // Calculate Character
 														// Index (Offset by
