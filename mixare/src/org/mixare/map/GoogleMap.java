@@ -80,6 +80,7 @@ public class GoogleMap extends SherlockGoogleMapActivity implements
 	// private MixContext mixContext;
 	private MapView mapView;
 
+
 	// static MixMap map;
 	private static Context thisContext;
 	private static TextView searchNotificationTxt;
@@ -148,14 +149,14 @@ public class GoogleMap extends SherlockGoogleMapActivity implements
 		maps = getResources().getStringArray(R.array.maps);
 
 		Context context = getSupportActionBar().getThemedContext();
-		ArrayAdapter<CharSequence> list = ArrayAdapter.createFromResource(
+		/*ArrayAdapter<CharSequence> list = ArrayAdapter.createFromResource(
 				context, R.array.maps, R.layout.sherlock_spinner_item);
-		list.setDropDownViewResource(R.layout.sherlock_spinner_dropdown_item);
+		list.setDropDownViewResource(R.layout.sherlock_spinner_dropdown_item);*/
 
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setSelectedNavigationItem(getOwnListPosition());
-		getSupportActionBar().setListNavigationCallbacks(list, this);
+		//getSupportActionBar().setListNavigationCallbacks(list, this);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		// if (dataView.isFrozen()) {
@@ -397,7 +398,7 @@ public class GoogleMap extends SherlockGoogleMapActivity implements
 	 * Gets fired when the selected item of the ListNavigation changes. This
 	 * method changes to the specified map. (Google Map/OSM)
 	 */
-	@Override
+	/*@Override
 	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
 		if (maps[itemPosition].equals(getString(R.string.map_menu_map_osm))) {
 			MixMap.changeMap(MixMap.MAPS.OSM);
@@ -406,7 +407,7 @@ public class GoogleMap extends SherlockGoogleMapActivity implements
 			finish();
 		}
 		return true;
-	}
+	}*/
 
 	private void handleIntent(Intent intent) {
 		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
@@ -536,6 +537,12 @@ public class GoogleMap extends SherlockGoogleMapActivity implements
 		final String property = "pathVisible";
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 		return settings.getBoolean(property, true);
+	}
+
+	@Override
+	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
 

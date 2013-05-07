@@ -34,6 +34,8 @@ import org.mixare.lib.gui.GLParameters;
 import org.mixare.lib.gui.PaintScreen;
 import org.mixare.lib.reality.Filter;
 import org.mixare.lib.render.Matrix;
+import org.mixare.map.GoogleMap;
+import org.mixare.map.GoogleMapV2;
 import org.mixare.map.MixMap;
 import org.mixare.mgr.HttpTools;
 
@@ -733,7 +735,7 @@ public class MixView extends SherlockActivity implements SensorEventListener,
 	 */
 	private void firstAccess(SharedPreferences settings) {
 		SharedPreferences.Editor editor = settings.edit();
-		AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+		/*AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
 		builder1.setMessage(getString(R.string.license));
 		builder1.setNegativeButton(getString(R.string.close_button),
 				new DialogInterface.OnClickListener() {
@@ -744,7 +746,7 @@ public class MixView extends SherlockActivity implements SensorEventListener,
 		AlertDialog alert1 = builder1.create();
 		alert1.setTitle(getString(R.string.license_title));
 		alert1.show();
-		editor.putBoolean("firstAccess", true);
+		*/editor.putBoolean("firstAccess", true);
 
 		// value for maximum POI for each selected OSM URL to be active by
 		// default is 5
@@ -886,7 +888,7 @@ public class MixView extends SherlockActivity implements SensorEventListener,
 			break;
 		/* Map View */
 		case 4:
-			Intent intent2 = new Intent(MixView.this, MixMap.class);
+			Intent intent2 = new Intent(MixView.this, GoogleMapV2.class);   // was MixMap.class
 			startActivityForResult(intent2, 20);
 			break;
 		/* zoom level */

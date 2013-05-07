@@ -139,7 +139,7 @@ public abstract class SherlockGoogleMapActivity extends MapActivity implements
 	}
 
 	@Override
-	public final boolean onCreateOptionsMenu(android.view.Menu menu) {
+	public boolean onCreateOptionsMenu(android.view.Menu menu) {
 		return getSherlock().dispatchCreateOptionsMenu(menu);
 	}
 

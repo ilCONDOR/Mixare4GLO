@@ -7,8 +7,19 @@
     <uses-sdk
         android:minSdkVersion="3"
         android:targetSdkVersion="10" />
+    
+   <permission
+        android:name="maps.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" /> 
+    
+  <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" /> 
 
+    <uses-permission android:name="maps.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -119,16 +130,28 @@
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-
+            
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
         
-        <activity android:name=".map.OsmMap"
+          <activity android:name=".map.GoogleMapV2"
             android:launchMode="singleTop"
             android:screenOrientation="user" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
+        
+        <!--  <activity android:name=".map.OsmMap"
+            android:launchMode="singleTop"
+            android:screenOrientation="user" >
+        </activity>-->
         
         <activity android:name=".data.AddDataSource" android:label="@string/add_datasource">
             <intent-filter>
@@ -143,6 +166,10 @@
         <activity android:name=".PluginListActivity" 
             android:label="@string/plugin_list">
         </activity>
+        
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyDiRsL3jogqfMTH3et42bZ7pjHeW92DN8k" />
         
     </application>
 </manifest>

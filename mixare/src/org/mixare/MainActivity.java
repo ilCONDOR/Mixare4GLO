@@ -8,6 +8,9 @@ import org.mixare.plugin.Plugin;
 import org.mixare.plugin.PluginStatus;
 import org.mixare.plugin.PluginType;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -17,6 +20,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
+import android.widget.Toast;
 
 /**
  * This is the main activity of mixare, that will be opened if mixare is
@@ -27,6 +31,8 @@ import android.os.Bundle;
  * @author A.Egal
  */
 public class MainActivity extends Activity {
+	
+	final int RQS_GooglePlayServices = 1;
 
 	private Context ctx;
 	private final String usedPluginsPrefs = "usedPlugins";
@@ -42,7 +48,16 @@ public class MainActivity extends Activity {
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+		 super.onCreate(savedInstanceState);
+		
+		 // check whether google play services are available for google maps v2
+		 int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
+		 if (resultCode == ConnectionResult.SUCCESS){
+		  //Toast.makeText(getApplicationContext(), "isGooglePlayServicesAvailable SUCCESS", Toast.LENGTH_LONG).show();
+	     }else{
+	      GooglePlayServicesUtil.getErrorDialog(resultCode, this, RQS_GooglePlayServices);
+	     }
+		  
 		plugins = new ArrayList<Plugin>();
 		ctx = this;
 		// TODO: change message if Plugins only have been deinstalled

@@ -77,7 +77,7 @@ class LocationMgrImpl implements LocationFinder {
 		try {
 			requestBestLocationUpdates();
 			//temporary set the current location, until a good provider is found
-			curLoc = lm.getLastKnownLocation(lm.getBestProvider(new Criteria(), true));
+			curLoc = lm.getLastKnownLocation(lm.getBestProvider(new Criteria(), true));       // network provider or gps provider to try
 			if (curLoc == null) {
 				setHardFix();
 			}
