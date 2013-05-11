@@ -1,11 +1,19 @@
 package org.mixare.map;
 
-import android.annotation.SuppressLint;
-import android.location.Location;
-import android.location.LocationListener;
 import android.os.Bundle;
+import java.util.Set;
 
-import com.actionbarsherlock.view.SubMenu;
+import org.mixare.R;
+
+import org.mixare.marker.POIMarker;
+import org.mixare.MixView;
+import org.mixare.DataView;
+
+import android.support.v4.app.FragmentActivity;
+import android.location.Location;
+import android.view.Menu;
+import android.view.MenuItem;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
@@ -18,52 +26,72 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
 
-import org.mixare.R;
-
-import android.support.v4.app.FragmentActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 
 
 public class GoogleMapV2 extends FragmentActivity implements OnMapClickListener{ 
 	
+	private DataView dataView;
+	private POIMarker markerV1;
+	private Set<org.mixare.lib.marker.Marker> markersV1;
+	
 	private UiSettings UISettings;
 	private OnMapClickListener listener;
 
-	final LatLng KIEL = new LatLng(53.551, 9.993);
 	private GoogleMap myMap;
 	private int mapType = GoogleMap.MAP_TYPE_NORMAL;
 
-	@SuppressLint("NewApi")
+
 	protected void onCreate(Bundle savedInstanceState) {
 		  
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.googlemapsv2);
 	    
+	    dataView = MixView.getDataView();
+	    
+	    // getting the map
 	    SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-	    myMap = mapFragment.getMap();	    
+	    myMap = mapFragment.getMap();	 
+	    
+	    // set map type
 	    myMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+	    
+	    // set click listener
 	    myMap.setOnMapClickListener(this);
 	    
-	    //location button
-	    myMap.setMyLocationEnabled(true);
+	    // showing location button
 	    UISettings = myMap.getUiSettings();
 	    UISettings.setMyLocationButtonEnabled(true);
+	    myMap.setMyLocationEnabled(true);
 	    
-	    
+	    // showing compass
 	    UISettings.setCompassEnabled(true);
+	    
+	    // zoom gestures enabled
 	    UISettings.setZoomGesturesEnabled(true);
+	    
+	    // scroll gestures enabled
 	    UISettings.setScrollGesturesEnabled(true);
+	    
+	    // rotate gestures enabled
 	    UISettings.setRotateGesturesEnabled(true);
 	    
 	    //click on map
 	    myMap.setOnMapClickListener(listener); 
 	   
+	    final LatLng KIEL = new LatLng(53.551, 9.993);
 	    Marker kiel = myMap.addMarker(new MarkerOptions()
 	        .position(KIEL)
 	        .title("Kiel")
 	        .snippet("Kiel is cool")
 	        .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_map_link)));
+	    
+	    
+	    POIMarker testMarker = getMarkerV1(0);
+	    final LatLng positionMarker = new LatLng(testMarker.getLatitude(), testMarker.getLongitude());
+	    Marker firstMarker = myMap.addMarker(new MarkerOptions()
+	    		.position(positionMarker)
+	    		.title("First POI")
+	    		.icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_map_link)));
 
 	    // Move the camera instantly to hamburg with a zoom of 15.
 	    myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(KIEL, 15));
@@ -141,4 +169,13 @@ public class GoogleMapV2 extends FragmentActivity implements OnMapClickListener{
 	public void onMapClick(LatLng point) {
 		// TODO Auto-generated method stub
 	}
-} 
+	
+	// private methods
+	private Set<org.mixare.lib.marker.Marker> getMarkersListV1(){
+		return markersV1 = dataView.getDataHandler().getMarkerList();
+	}
+	
+	private POIMarker getMarkerV1(int index){
+		return markerV1 = (POIMarker) dataView.getDataHandler().getMarker(index);
+	}
+}
