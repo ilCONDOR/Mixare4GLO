@@ -4,38 +4,45 @@ import android.os.Bundle;
 import java.util.Set;
 
 import org.mixare.R;
-
+import org.mixare.lib.MixUtils;
 import org.mixare.marker.POIMarker;
+import org.mixare.MixListView;
 import org.mixare.MixView;
 import org.mixare.DataView;
+import org.mixare.MixContext;
 
 import android.support.v4.app.FragmentActivity;
+import android.content.Context;
+import android.content.Intent;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
+import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polygon;
-import com.google.android.gms.maps.model.PolygonOptions;
 
 
 
-public class GoogleMapV2 extends FragmentActivity implements OnMapClickListener{ 
+public class GoogleMapV2 extends FragmentActivity implements OnMapClickListener, OnMapLongClickListener, OnMarkerClickListener{ 
 	
+	private MixContext mixContext;
+	private static Context context;
 	private DataView dataView;
 	private POIMarker markerV1;
 	private Set<org.mixare.lib.marker.Marker> markersV1;
 	
 	private UiSettings UISettings;
-	private OnMapClickListener listener;
 
 	private GoogleMap myMap;
 	private int mapType = GoogleMap.MAP_TYPE_NORMAL;
@@ -46,6 +53,7 @@ public class GoogleMapV2 extends FragmentActivity implements OnMapClickListener{
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.googlemapsv2);
 	    
+	    context = this;
 	    dataView = MixView.getDataView();
 	    
 	    // getting the map
@@ -54,9 +62,6 @@ public class GoogleMapV2 extends FragmentActivity implements OnMapClickListener{
 	    
 	    // set map type
 	    myMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-	    
-	    // set click listener
-	    myMap.setOnMapClickListener(this);
 	    
 	    // showing location button
 	    UISettings = myMap.getUiSettings();
@@ -75,41 +80,30 @@ public class GoogleMapV2 extends FragmentActivity implements OnMapClickListener{
 	    // rotate gestures enabled
 	    UISettings.setRotateGesturesEnabled(true);
 	    
-	    //click on map
-	    myMap.setOnMapClickListener(listener); 
+	    //click on map enabled
+	    myMap.setOnMapClickListener(this); 
+	    
+	    //click on marker enabled
+	    myMap.setOnMarkerClickListener(this);
 	   
-	    final LatLng KIEL = new LatLng(53.551, 9.993);
-	    Marker kiel = myMap.addMarker(new MarkerOptions()
-	        .position(KIEL)
-	        .title("Kiel")
-	        .snippet("Kiel is cool")
-	        .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_map_link)));
+	    // creating the marker v2 based on marker v1
+	    int numberMarkersV1 = getMarkersCountV1();
+	    for (int i=0;i<numberMarkersV1; i++){
+	    	POIMarker testMarker = getMarkerV1(i);
+	        LatLng positionMarker = new LatLng(testMarker.getLatitude(), testMarker.getLongitude());
+	        String URL = testMarker.getURL();
+	    	Marker markerV1 = myMap.addMarker(new MarkerOptions()
+    		.position(positionMarker)
+    		.icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_map_link))
+    		.snippet(URL));
+	    } 
 	    
-	    
-	    POIMarker testMarker = getMarkerV1(0);
-	    final LatLng positionMarker = new LatLng(testMarker.getLatitude(), testMarker.getLongitude());
-	    Marker firstMarker = myMap.addMarker(new MarkerOptions()
-	    		.position(positionMarker)
-	    		.title("First POI")
-	    		.icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_map_link)));
+	    // move the camera instantly to my location with a zoom of 10
+	    LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
+	    String provider = service.getBestProvider(new Criteria(), false);
+	    Location location = service.getLastKnownLocation(provider);
+	    myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(),location.getLongitude()), 10));
 
-	    // Move the camera instantly to hamburg with a zoom of 15.
-	    myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(KIEL, 15));
-
-	    // Zoom in, animating the camera.
-	    myMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
-	    
-	    // Instantiates a new Polygon object and adds points to define a rectangle
-	    PolygonOptions polyOptions = new PolygonOptions()
-	                  .add(new LatLng(55.735, 10.936),
-	                       new LatLng(56.733, 11.093),
-	                       new LatLng(53.968, 9.984),
-	                       new LatLng(63.942, 11.733),
-	                       new LatLng(55.735, 10.936));
-	    
-	    // Get back the mutable Polygon
-	    Polygon polygon = myMap.addPolygon(polyOptions);
-	    polygon.setStrokeWidth(3f);
 	  }
 	  
 	@Override
@@ -139,6 +133,11 @@ public class GoogleMapV2 extends FragmentActivity implements OnMapClickListener{
             case R.id.hybrid_map:
             	mapType = GoogleMap.MAP_TYPE_HYBRID;
                 break;
+                
+            case R.id.listview:
+            	Intent showListMarkers = new Intent(this, MixListView.class);
+    			showListMarkers.setAction(Intent.ACTION_VIEW);
+    			startActivity(showListMarkers);
         }
         
         myMap.setMapType(mapType);
@@ -170,11 +169,40 @@ public class GoogleMapV2 extends FragmentActivity implements OnMapClickListener{
 		// TODO Auto-generated method stub
 	}
 	
-	// private methods
+	@Override
+	public void onMapLongClick(LatLng point) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public boolean onMarkerClick(Marker marker) {
+		String URL = marker.getSnippet().toString();
+		String newURL = MixUtils.parseAction(URL);
+				try {
+					dataView.getContext().getWebContentManager().loadWebPage(newURL, context);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		return true;
+	}
+	
+	
+	
+	
+	// PRIVATE METHODS
+	
+	// get number of markers v1
+	private int getMarkersCountV1(){
+		return dataView.getDataHandler().getMarkerCount();
+	}
+	
+	// get list as set of markers v1
 	private Set<org.mixare.lib.marker.Marker> getMarkersListV1(){
 		return markersV1 = dataView.getDataHandler().getMarkerList();
 	}
 	
+	// get single marker v1
 	private POIMarker getMarkerV1(int index){
 		return markerV1 = (POIMarker) dataView.getDataHandler().getMarker(index);
 	}

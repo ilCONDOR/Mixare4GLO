@@ -26,14 +26,14 @@ public class MixMap extends Activity {
 		Log.d("test", map);
 		if (map == MAPS.GOOGLE.name()) {
 			Log.d("test", "Launch GoogleMaps");
-			mapToLaunch = new Intent(this, GoogleMap.class);
+			mapToLaunch = new Intent(this, GoogleMapV2.class);
 		} else if (map == MAPS.OSM.name()){
 			Log.d("test", "Launch OSM");
 			mapToLaunch = new Intent(this, OsmMap.class);
 		} else {
 			Log.d("test", "Fallback");
 			// fallback
-			mapToLaunch = new Intent(this, GoogleMap.class);
+			mapToLaunch = new Intent(this, GoogleMapV2.class);
 			changeMap(MAPS.GOOGLE);
 		}
 		

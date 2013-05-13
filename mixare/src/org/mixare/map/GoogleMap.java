@@ -575,11 +575,9 @@ class MixOverlay extends ItemizedOverlay<OverlayItem> {
 	@Override
 	protected boolean onTap(int index) {
 		String url = overlayItems.get(index).getSnippet();
-
 		try {
 			if (url != null && url.startsWith("webpage")) {
 				String newUrl = MixUtils.parseAction(url);
-				// Log.d("test", "open: " + newUrl);
 				mixMap.getDataView().getContext().getWebContentManager()
 						.loadWebPage(newUrl, mixMap.getMapContext());
 			} else {

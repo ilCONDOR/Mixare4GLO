@@ -14,4 +14,8 @@
                   android:title="Hybrid map"/>
         </menu>
     </item>
+    <item>
+            <item android:id="@+id/listview"
+                  android:title="ListView"/>
+    </item>
 </menu>

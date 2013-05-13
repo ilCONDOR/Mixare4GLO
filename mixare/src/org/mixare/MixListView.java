@@ -6,10 +6,12 @@ import java.util.List;
 import org.mixare.data.DataHandler;
 import org.mixare.lib.MixUtils;
 import org.mixare.lib.marker.Marker;
+import org.mixare.map.GoogleMapV2;
 import org.mixare.map.MixMap;
 import org.mixare.sectionedlist.Item;
 import org.mixare.sectionedlist.SectionItem;
 
+import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -141,7 +143,7 @@ public class MixListView extends SherlockActivity {
 			break;
 		case MENU_MAPVIEW_ID:
 			// Start MixMap to choose which Map to start
-			Intent map = new Intent(MixListView.this, MixMap.class);
+			Intent map = new Intent(MixListView.this, GoogleMapV2.class);
 			startActivity(map);
 			break;
 		case MENU_SEARCH_ID:
@@ -390,6 +392,7 @@ public class MixListView extends SherlockActivity {
 			return items.get(position);
 		}
 
+		@SuppressLint("NewApi")
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			Item i = getItem(position);
