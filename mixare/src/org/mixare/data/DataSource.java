@@ -240,6 +240,9 @@ public class DataSource {
 	public int getDataSourceIcon() {
 		int ret;
 		switch (this.type) {
+		case GLO:
+			ret = R.drawable.glo;
+			break;
 		case TWITTER:
 			ret = R.drawable.twitter;
 			break;
@@ -253,7 +256,7 @@ public class DataSource {
 			ret = R.drawable.arena;
 			break;
 		case PANORAMIO:
-//			ret = R.drawable.ic_launcher;
+			// ret = R.drawable.ic_launcher;
 			/*
 			 * Logo from http://www.tilo-hensel.de/free-glossy-community-icons
 			 * Created by Tilo Hensel licensed under

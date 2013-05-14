@@ -66,7 +66,7 @@
     <datasource id="1" >
         <name>altervista</name>
 		<url>http://g3r4.altervista.org/result_ok.gml</url>
-		<type>1</type>
+		<type>0</type>
         <display>0</display>
         <visible>true</visible>
         <editable>false</editable>
