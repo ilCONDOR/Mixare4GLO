@@ -45,13 +45,14 @@
 	<string name="no">No</string>
 		
 	<string name="menu_item_1">Data Source</string>
-	<string name="menu_item_2">Plugins</string>
-	<string name="menu_item_3">List view</string>
-	<string name="menu_item_4">Map view</string>
-	<string name="menu_item_5">Zoom level</string>
-	<string name="menu_item_6">Search</string>
-	<string name="menu_item_7">Info</string>
-	<string name="menu_item_8">License</string>
+	<!--  <string name="menu_item_2">Plugins</string>-->
+	<string name="menu_item_2">List view</string>
+	<string name="menu_item_3">Map view</string>
+	<string name="menu_item_4">Zoom level</string>
+	<string name="menu_item_5">Search</string>
+	<string name="menu_item_6">Info</string>
+	<string name="menu_item_7">License</string>
+	<string name="menu_item_8">Refresh</string>
 
 	<string name="cancel">Cancel</string>
 

@@ -824,18 +824,17 @@ public class MixView extends SherlockActivity implements SensorEventListener,
 				getString(R.string.menu_item_7));
 		MenuItem item8 = menu.add(base, base + 7, base + 7,
 				getString(R.string.menu_item_8));
-
-		MenuItem item9 = menu.add(base, base + 8, base + 8, "Refresh");
-		MenuItem item10 = menu.add(base, base + 9, base + 9, "Debug BB");
+		
+		//MenuItem item10 = menu.add(base, base + 9, base + 9, "Debug BB");
 
 		/* assign icons to the menu items */
 		item1.setIcon(drawable.icon_datasource);
-		item2.setIcon(drawable.icon_datasource);
-		item3.setIcon(android.R.drawable.ic_menu_view);
-		item4.setIcon(android.R.drawable.ic_menu_mapmode);
-		item5.setIcon(android.R.drawable.ic_menu_zoom);
-		item6.setIcon(android.R.drawable.ic_menu_search);
-		item7.setIcon(android.R.drawable.ic_menu_info_details);
+		item2.setIcon(android.R.drawable.ic_menu_view);
+		item3.setIcon(android.R.drawable.ic_menu_mapmode);
+		item4.setIcon(android.R.drawable.ic_menu_zoom);
+		item5.setIcon(android.R.drawable.ic_menu_search);
+		item6.setIcon(android.R.drawable.ic_menu_info_details);
+		item7.setIcon(android.R.drawable.ic_menu_share);
 		item8.setIcon(android.R.drawable.ic_menu_share);
 
 		return true;
@@ -856,7 +855,7 @@ public class MixView extends SherlockActivity implements SensorEventListener,
 								getString(R.string.no_website_available));
 			}
 			break;
-		/* Plugin View */
+		/* Plugin View 
 		case 2:
 			if (!getDataView().getIsLauncherStarted()) {
 				Intent intent = new Intent(MixView.this,
@@ -868,9 +867,10 @@ public class MixView extends SherlockActivity implements SensorEventListener,
 						.addNotification(
 								getString(R.string.no_website_available));
 			}
-			break;
+			break;*/
+			
 		/* List view */
-		case 3:
+		case 2:
 			/*
 			 * if the list of titles to show in alternative list view is not
 			 * empty
@@ -887,12 +887,12 @@ public class MixView extends SherlockActivity implements SensorEventListener,
 			}
 			break;
 		/* Map View */
-		case 4:
+		case 3:
 			Intent intent2 = new Intent(MixView.this, GoogleMapV2.class);   // was MixMap.class
 			startActivityForResult(intent2, 20);
 			break;
 		/* zoom level */
-		case 5:
+		case 4:
 			// addContentView(zoombarLayout, new FrameLayout.LayoutParams(
 			// LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT,
 			// Gravity.BOTTOM));
@@ -902,11 +902,11 @@ public class MixView extends SherlockActivity implements SensorEventListener,
 					getMixViewData().getMyZoomBar().getProgress());
 			break;
 		/* Search */
-		case 6:
+		case 5:
 			onSearchRequested();
 			break;
 		/* GPS Information */
-		case 7:
+		case 6:
 			Location currentGPSInfo = getMixViewData().getMixContext()
 					.getLocationFinder().getCurrentLocation();
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -933,7 +933,7 @@ public class MixView extends SherlockActivity implements SensorEventListener,
 			alert.show();
 			break;
 		/* Case 6: license agreements */
-		case 8:
+		case 7:
 			AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
 			builder1.setMessage(getString(R.string.license));
 			/* Retry */
@@ -947,13 +947,13 @@ public class MixView extends SherlockActivity implements SensorEventListener,
 			alert1.setTitle(getString(R.string.license_title));
 			alert1.show();
 			break;
-		case 9:
+		case 8:
 			refresh();
 			break;
-		case 10:
+		/*case 10:
 			GLParameters.ENABLEBB = !GLParameters.ENABLEBB;
 			GLParameters.DEBUG = !GLParameters.DEBUG;
-			break;
+			break;*/
 		}
 		return true;
 	}
