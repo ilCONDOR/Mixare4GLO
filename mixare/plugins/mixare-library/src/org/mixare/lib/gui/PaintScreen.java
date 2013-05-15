@@ -18,17 +18,11 @@
  */
 package org.mixare.lib.gui;
 
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.microedition.khronos.egl.EGLConfig;
@@ -36,7 +30,6 @@ import javax.microedition.khronos.opengles.GL10;
 
 import org.mixare.lib.DataViewInterface;
 import org.mixare.lib.MixViewInterface;
-import org.mixare.lib.R;
 import org.mixare.lib.model3d.Mesh;
 import org.mixare.lib.model3d.ModelLoadException;
 import org.mixare.lib.model3d.parsers.ObjReader;
@@ -44,11 +37,9 @@ import org.mixare.lib.model3d.parsers.OffReader;
 import org.mixare.lib.model3d.text.GLText;
 import org.mixare.lib.model3d.text.TextBox;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -56,7 +47,6 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.opengl.GLSurfaceView;
 import android.opengl.GLU;
-import android.os.Environment;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
@@ -848,7 +838,7 @@ public class PaintScreen implements Parcelable, GLSurfaceView.Renderer {
 				circleModel.setDistance(90); 
 				circleModel.setSchaal(20);                 // movement of the circle on the same axis
 				circleModel.setObj(id);
-				circleModel.setColor(0x00FF00);  		  // green
+				circleModel.setColor(0x00FF00);  		  // blue
 				circleModel.setxPos(x);
 				circleModel.setyPos(y);
 				paint3DModel(circleModel);

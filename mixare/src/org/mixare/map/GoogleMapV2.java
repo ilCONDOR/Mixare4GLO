@@ -9,9 +9,8 @@ import org.mixare.marker.POIMarker;
 import org.mixare.MixListView;
 import org.mixare.MixView;
 import org.mixare.DataView;
-import org.mixare.MixContext;
 
-import android.support.v4.app.FragmentActivity;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Criteria;
@@ -25,7 +24,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
-import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -34,13 +33,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 
 
-public class GoogleMapV2 extends FragmentActivity implements OnMapClickListener, OnMapLongClickListener, OnMarkerClickListener{ 
+public class GoogleMapV2 extends Activity implements OnMapClickListener, OnMapLongClickListener, OnMarkerClickListener{ 
 	
-	private MixContext mixContext;
 	private static Context context;
 	private DataView dataView;
-	private POIMarker markerV1;
-	private Set<org.mixare.lib.marker.Marker> markersV1;
+
 	
 	private UiSettings UISettings;
 
@@ -57,7 +54,7 @@ public class GoogleMapV2 extends FragmentActivity implements OnMapClickListener,
 	    dataView = MixView.getDataView();
 	    
 	    // getting the map
-	    SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+	    MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
 	    myMap = mapFragment.getMap();	 
 	    
 	    // set map type
@@ -94,7 +91,7 @@ public class GoogleMapV2 extends FragmentActivity implements OnMapClickListener,
 	        String URL = testMarker.getURL();
 	    	Marker markerV1 = myMap.addMarker(new MarkerOptions()
     		.position(positionMarker)
-    		.icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_map_link))
+    		.icon(BitmapDescriptorFactory.fromResource(R.drawable.glo))
     		.snippet(URL));
 	    } 
 	    
@@ -199,11 +196,13 @@ public class GoogleMapV2 extends FragmentActivity implements OnMapClickListener,
 	
 	// get list as set of markers v1
 	private Set<org.mixare.lib.marker.Marker> getMarkersListV1(){
+		Set<org.mixare.lib.marker.Marker> markersV1;
 		return markersV1 = dataView.getDataHandler().getMarkerList();
 	}
 	
 	// get single marker v1
 	private POIMarker getMarkerV1(int index){
+		POIMarker markerV1;
 		return markerV1 = (POIMarker) dataView.getDataHandler().getMarker(index);
 	}
 }
