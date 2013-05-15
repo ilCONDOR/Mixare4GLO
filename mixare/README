@@ -7,7 +7,7 @@ To be improved:
 
 Anything else:
 
-- When resuming Mixare the Surface3D does not appear on my One X, while it does on my TF101..
+- When resuming Mixare the Surface3D does not appear on my One X, while it does on my TF101.
 - Firmware bug on my TF101 caused by glTexParameteriv. Does not happen on my One X. See following trace:
 
 I/DEBUG   (  112): *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
