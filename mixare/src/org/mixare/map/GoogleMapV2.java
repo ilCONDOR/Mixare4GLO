@@ -38,7 +38,6 @@ public class GoogleMapV2 extends Activity implements OnMapClickListener, OnMapLo
 	private static Context context;
 	private DataView dataView;
 
-	
 	private UiSettings UISettings;
 
 	private GoogleMap myMap;
@@ -172,13 +171,13 @@ public class GoogleMapV2 extends Activity implements OnMapClickListener, OnMapLo
 		
 	}
 	
+	// open webpage of clicked marker
 	public boolean onMarkerClick(Marker marker) {
 		String URL = marker.getSnippet().toString();
 		String newURL = MixUtils.parseAction(URL);
 				try {
 					dataView.getContext().getWebContentManager().loadWebPage(newURL, context);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 		return true;
@@ -195,13 +194,16 @@ public class GoogleMapV2 extends Activity implements OnMapClickListener, OnMapLo
 	}
 	
 	// get list as set of markers v1
+	@SuppressWarnings("unused")
 	private Set<org.mixare.lib.marker.Marker> getMarkersListV1(){
 		Set<org.mixare.lib.marker.Marker> markersV1;
 		return markersV1 = dataView.getDataHandler().getMarkerList();
 	}
 	
 	// get single marker v1
+	@SuppressWarnings("deprecation")
 	private POIMarker getMarkerV1(int index){
+		@SuppressWarnings("unused")
 		POIMarker markerV1;
 		return markerV1 = (POIMarker) dataView.getDataHandler().getMarker(index);
 	}
