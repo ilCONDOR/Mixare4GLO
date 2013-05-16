@@ -13,6 +13,7 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -51,11 +52,12 @@ public class MainActivity extends Activity {
 		 super.onCreate(savedInstanceState);
 		
 		 // check whether google play services are available for google maps v2
-		 int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
+		 int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
 		 if (resultCode == ConnectionResult.SUCCESS){
-		  //Toast.makeText(getApplicationContext(), "isGooglePlayServicesAvailable SUCCESS", Toast.LENGTH_LONG).show();
+			 Toast.makeText(getApplicationContext(), "isGooglePlayServicesAvailable SUCCESS", Toast.LENGTH_LONG).show();
 	     }else{
-	      GooglePlayServicesUtil.getErrorDialog(resultCode, this, RQS_GooglePlayServices);
+	    	 Dialog dialog = GooglePlayServicesUtil.getErrorDialog(resultCode, this, 10);
+	    	 dialog.show();
 	     }
 		  
 		plugins = new ArrayList<Plugin>();

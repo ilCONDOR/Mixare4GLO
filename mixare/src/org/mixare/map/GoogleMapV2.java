@@ -90,7 +90,7 @@ public class GoogleMapV2 extends Activity implements OnMapClickListener, OnMapLo
 	        String URL = testMarker.getURL();
 	    	Marker markerV1 = myMap.addMarker(new MarkerOptions()
     		.position(positionMarker)
-    		.icon(BitmapDescriptorFactory.fromResource(R.drawable.glo))
+    		//.icon(BitmapDescriptorFactory.fromResource(R.drawable.glo))
     		.snippet(URL));
 	    } 
 	    
