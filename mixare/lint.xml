@@ -3,5 +3,6 @@
     <issue id="MissingTranslation" severity="warning" />
     <issue id="NewApi">
         <ignore path="src/org/mixare/data/DataSourceStorage.java" />
+        <ignore path="src/org/mixare/map/GoogleMapV2.java" />
     </issue>
 </lint>

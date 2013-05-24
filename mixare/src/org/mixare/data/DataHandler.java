@@ -25,7 +25,10 @@ import java.util.List;
 import java.util.Set;
 
 import org.mixare.MixContext;
+import org.mixare.data.convert.GloPolygonDataProcessor;
 import org.mixare.lib.marker.Marker;
+
+import com.google.android.gms.maps.model.LatLng;
 
 import android.location.Location;
 
@@ -118,4 +121,4 @@ public class DataHandler {
 		}
 		return null;
 	}
-}
+ }

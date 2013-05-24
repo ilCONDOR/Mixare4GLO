@@ -62,7 +62,7 @@ public class DataConvertor {
 	public List<Marker> load(String url, String rawResult, DataSource ds){
 		DataProcessor dataProcessor = searchForMatchingDataProcessors(url, rawResult, ds.getType());
 		if(dataProcessor == null){
-			dataProcessor = new GeoDataProcessorGML(); //using this as default if nothing is found.
+			dataProcessor = new GloPointDataProcessor(); //using this as default if nothing is found.
 		}
 		try {
 			return dataProcessor.load(rawResult, ds.getDataSourceId(), ds.getColor());
@@ -104,7 +104,8 @@ public class DataConvertor {
 		//dataProcessors.add(new TwitterDataProcessor());
 		//dataProcessors.add(new OsmDataProcessor());
 		//dataProcessors.add(new PanoramioDataProcessor());
-		dataProcessors.add(new GeoDataProcessorGML());
+		dataProcessors.add(new GloPointDataProcessor());
+		dataProcessors.add(new GloPolygonDataProcessor());
 	}
 	
 	public static String getOSMBoundingBox(double lat, double lon, double radius) {

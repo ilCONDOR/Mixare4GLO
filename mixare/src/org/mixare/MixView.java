@@ -36,7 +36,6 @@ import org.mixare.lib.reality.Filter;
 import org.mixare.lib.render.Matrix;
 import org.mixare.map.GoogleMap;
 import org.mixare.map.GoogleMapV2;
-import org.mixare.map.MixMap;
 import org.mixare.mgr.HttpTools;
 
 import android.app.AlertDialog;

@@ -139,7 +139,8 @@
         
         <activity android:name=".map.GoogleMapV2"
             android:launchMode="singleTop"
-            android:screenOrientation="user" >
+            android:screenOrientation="user" 
+            android:configChanges="orientation|keyboardHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -147,11 +148,6 @@
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
-        </activity>
-        
-        <activity android:name=".map.OsmMap"
-            android:launchMode="singleTop"
-            android:screenOrientation="user" >
         </activity>
         
         <activity android:name=".data.AddDataSource" android:label="@string/add_datasource">
@@ -171,7 +167,7 @@
         
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDiRsL3jogqfMTH3et42bZ7pjHeW92DN8k"/>
+            android:value="AIzaSyDEoQ-zbKjzje0EOpTnckaiaak2QtOzuMs"/>
         
     </application>
 </manifest>

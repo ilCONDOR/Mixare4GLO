@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.mixare.data.DataHandler;
+import org.mixare.data.DataSource;
 
 import org.mixare.lib.HtmlUnescape;
 import org.mixare.lib.marker.Marker;
@@ -33,38 +34,38 @@ import org.mixare.marker.POIMarker;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import android.text.TextUtils;
 import android.util.Log;
 
-public class GeoDataProcessorGML extends DataHandler implements DataProcessor {
+public class GloPolygonDataProcessor extends DataHandler implements DataProcessor {
 	
-	public static final int MAX_JSON_OBJECTS = 1000;
+	public static LatLng[] polygonCoordinates = new LatLng[50];
 
 	@Override
 	public String[] getUrlMatch() {
-		String[] str = new String[0];
+		String[] str = {"polygon"};
 		return str;
 	}
 
 	@Override
 	public String[] getDataMatch() {
-		String[] str = new String[0];
+		String[] str = {"polygon"};
 		return str;
 	}
 	
 	@Override
 	public boolean matchesRequiredType(String type) {
-		return true;
+		if(type.equals(DataSource.TYPE.GloPolygon.name())){
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public List<Marker> load(String rawData, int taskId, int colour){
 		
-		List<Marker> markers = new ArrayList<Marker>();
-	    Marker ma = null;
-		
-		String[] latlng = new String[2];
-		Double latAsDouble = 0.00, lngAsDouble = 0.00, altAsDouble = 0.00;
 		StringBuilder coordinates = new StringBuilder();
 		StringBuilder altitudes = new StringBuilder();
 		StringBuilder IDs = new StringBuilder();
@@ -72,6 +73,7 @@ public class GeoDataProcessorGML extends DataHandler implements DataProcessor {
 		StringBuilder descriptions = new StringBuilder();
 		StringBuilder URLs = new StringBuilder();
 		StringBuilder meanings = new StringBuilder();
+		String[] singleEffectiveCoordinates = null;
 		
 		try {
 			XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -107,54 +109,48 @@ public class GeoDataProcessorGML extends DataHandler implements DataProcessor {
 	        }
 	        
 	        String[] singleCoordinates = coordinates.toString().split("\n");
- 	        String[] singleAltitude = altitudes.toString().split("\n");
 	        String[] singleID = IDs.toString().split("\n");
 	        String[] singleTitle = titles.toString().split("\n");
 	        String[] singleDescription = descriptions.toString().split("\n");
 	        String[] singleMeaning = meanings.toString().split("\n");
 	        String[] singleURL = URLs.toString().split("\n");
 	        
-	        // filter out only coordinates of real geographic object (discard coordinates of bounding box)
-	        String[] singleCoordinatesFiltered = new String[singleID.length];
+	        // filter out only coordinates of real geographic object (discard other coordinates)
+	        String[] effectiveCoordinates = new String[singleID.length];
 	        int j = 0;
 	        for (int i = 2; i < singleCoordinates.length; i=i+2){
-	        	  singleCoordinatesFiltered[j] = singleCoordinates[i];
+	        	  effectiveCoordinates[j] = singleCoordinates[i];
 	        	  j++;
+	        }
+	        
+	        // get single par of lat lng coordinates
+	        for (int k = 0; k < effectiveCoordinates.length; k++){
+	        	singleEffectiveCoordinates = effectiveCoordinates[k].split(" ");
+	        }	
+	        
+	        for (int l = 0; l < singleEffectiveCoordinates.length; l++){
+	        	String[] tempString = new String[2];
+	        	tempString = singleEffectiveCoordinates[l].split(",");
+	        	Double lng = Double.parseDouble(tempString[0]);
+	        	Double lat = Double.parseDouble(tempString[1]);
+	        	LatLng tempLatLng = new LatLng(lat,lng);
+	        	polygonCoordinates[l] = tempLatLng;
 	        }
  
 	        //logging for debugging 
-	        Log.v("singleCoordinates", TextUtils.join("\n", singleCoordinatesFiltered));
-	        Log.v("singleAltitude", altitudes.toString());
+	        Log.v("singleCoordinates", TextUtils.join("\n", effectiveCoordinates));
+	        Log.v("abc", TextUtils.join("\n", singleEffectiveCoordinates));
+	        /*Log.v("singleAltitude", altitudes.toString());
 	        Log.v("singleID", IDs.toString());
 	        Log.v("singleTitle", titles.toString());
 	        Log.v("singleDescription", descriptions.toString());
 	        Log.v("singleMeaning", meanings.toString());
-	        Log.v("singleURL", URLs.toString());    
-
-	        
-	        // creating the POIs
-	        for (int i = 0; i < singleID.length; i++){
-	        	    latlng = singleCoordinatesFiltered[i].toString().split(",");
-		        	latAsDouble = Double.parseDouble(latlng[1]);                     // long before lat because of server 
-		        	lngAsDouble = Double.parseDouble(latlng[0]);
-		        	altAsDouble = Double.parseDouble(singleAltitude[i]);
-
-		        	ma = new POIMarker(
-							singleID[i],
-							HtmlUnescape.unescapeHTML(singleTitle[i]), 
-							latAsDouble, 
-							lngAsDouble, 
-							altAsDouble, 
-							singleURL[i], 
-							taskId, colour);
-					
-					markers.add(ma);
-	        }
+	        Log.v("singleURL", URLs.toString());   */ 
 	        
 		} catch (Exception e) {
 			Log.e("exception",e.toString());
 		}
-		return markers;
+		return null;
 	}
 }
 			

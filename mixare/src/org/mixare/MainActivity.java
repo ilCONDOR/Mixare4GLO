@@ -54,7 +54,7 @@ public class MainActivity extends Activity {
 		 // check whether google play services are available for google maps v2
 		 int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
 		 if (resultCode == ConnectionResult.SUCCESS){
-			 Toast.makeText(getApplicationContext(), "isGooglePlayServicesAvailable SUCCESS", Toast.LENGTH_LONG).show();
+			 //Toast.makeText(getApplicationContext(), "isGooglePlayServicesAvailable SUCCESS", Toast.LENGTH_LONG).show();
 	     }else{
 	    	 Dialog dialog = GooglePlayServicesUtil.getErrorDialog(resultCode, this, 10);
 	    	 dialog.show();

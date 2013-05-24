@@ -4,6 +4,7 @@ import android.os.Bundle;
 import java.util.Set;
 
 import org.mixare.R;
+import org.mixare.data.convert.GloPolygonDataProcessor;
 import org.mixare.lib.MixUtils;
 import org.mixare.marker.POIMarker;
 import org.mixare.MixListView;
@@ -13,6 +14,8 @@ import org.mixare.DataView;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
@@ -26,10 +29,11 @@ import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.UiSettings;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polygon;
+import com.google.android.gms.maps.model.PolygonOptions;
 
 
 
@@ -41,9 +45,10 @@ public class GoogleMapV2 extends Activity implements OnMapClickListener, OnMapLo
 	private UiSettings UISettings;
 
 	private GoogleMap myMap;
-	private int mapType = GoogleMap.MAP_TYPE_NORMAL;
+	private Polygon polygon;
 
-
+	
+	// creates the activity 
 	protected void onCreate(Bundle savedInstanceState) {
 		  
 	    super.onCreate(savedInstanceState);
@@ -100,8 +105,28 @@ public class GoogleMapV2 extends Activity implements OnMapClickListener, OnMapLo
 	    Location location = service.getLastKnownLocation(provider);
 	    myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(),location.getLongitude()), 10));
 
+	    // drawing the polygon on map
+	    polygon = myMap.addPolygon(createPolygonOptions().strokeColor(Color.RED).strokeWidth(5));
+	    
 	  }
+
+	 // activity lifecycle methods
+	 protected void onResume() {
+		 super.onResume();
+	 }
+	 
+	 // avoids that when screen rotates the activity is recreated
+	 @Override
+	 public void onConfigurationChanged(Configuration newConfig) {
+	     super.onConfigurationChanged(newConfig);
+	     if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+	         onResume();
+	     } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+	         onResume();
+	     }
+	 }
 	  
+	// create options menu 
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -109,10 +134,12 @@ public class GoogleMapV2 extends Activity implements OnMapClickListener, OnMapLo
         return true;
     }
 
+	// select menu option
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
 
+    	int mapType = GoogleMap.MAP_TYPE_NORMAL;
         switch(item.getItemId()){
             case R.id.normal_map:
                 mapType = GoogleMap.MAP_TYPE_NORMAL;
@@ -171,7 +198,7 @@ public class GoogleMapV2 extends Activity implements OnMapClickListener, OnMapLo
 		
 	}
 	
-	// open webpage of clicked marker
+	// open web page of clicked marker
 	public boolean onMarkerClick(Marker marker) {
 		String URL = marker.getSnippet().toString();
 		String newURL = MixUtils.parseAction(URL);
@@ -207,4 +234,18 @@ public class GoogleMapV2 extends Activity implements OnMapClickListener, OnMapLo
 		POIMarker markerV1;
 		return markerV1 = (POIMarker) dataView.getDataHandler().getMarker(index);
 	}
+	
+	// create polygon options getting data from GloPolygonDataProcessor
+	private PolygonOptions createPolygonOptions(){
+		PolygonOptions polygonOptions = new PolygonOptions();
+		LatLng[] polygonCoordinates = new LatLng[50];
+		polygonCoordinates = GloPolygonDataProcessor.polygonCoordinates;
+		for (int i=0; i<polygonCoordinates.length; i++){
+			if (polygonCoordinates[i] == null){
+				break;
+			}
+			polygonOptions.add(new LatLng(polygonCoordinates[i].latitude,polygonCoordinates[i].longitude));
+		}
+		return polygonOptions;
+	} 
 }

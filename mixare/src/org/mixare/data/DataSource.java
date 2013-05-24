@@ -24,7 +24,6 @@ import java.net.URL;
 
 import org.mixare.R;
 import org.mixare.data.convert.DataConvertor;
-import org.mixare.data.convert.PanoramioDataProcessor;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
@@ -112,24 +111,18 @@ public class DataSource {
 		if (!ret.startsWith("file://")) {
 			switch (this.type) {
 			
-			case GLO:
+			case GloPoint:
 				String latitude = Double.toString(lat);
 				String longitude = Double.toString(lon);
 				//String altitude = Double.toString(alt);  not used at the moment
 				ret += "?map=/home/achow/Desktop/wfs.map&service=wfs&version=1.0.0&request=getfeature&TYPENAME=learning_object&Filter=<Filter><DWithin><PropertyName>geom_id</PropertyName><gml:Point><gml:coordinates>"+longitude+","+latitude+"</gml:coordinates></gml:Point><Distance%20units='m'>10</Distance></DWithin></Filter>None";
 				break;
-
-			case WIKIPEDIA:
-				// Free service limited to 20km
-				float geoNamesRadius = radius > 20 ? 20 : radius;
-				ret += "?lat=" + lat + "&lng=" + lon + "&radius="
-						+ geoNamesRadius + "&maxRows=50" + "&lang=" + locale
-						+ "&username=edwin";
-				break;
-
-			case TWITTER:
-				ret += "?geocode=" + lat + "%2C" + lon + "%2C"
-						+ Math.max(radius, 1.0) + "km";
+				
+			case GloPolygon:
+				String latitude1 = Double.toString(lat);
+				String longitude1 = Double.toString(lon);
+				//ask for right request link
+				ret += "?map=/home/achow/Desktop/wfs.map&service=wfs&version=1.0.0&request=getfeature&TYPENAME=learning_object&Filter=<Filter><DWithin><PropertyName>geom_id</PropertyName><gml:Point><gml:coordinates>"+longitude1+","+latitude1+"</gml:coordinates></gml:Point><Distance%20units='m'>10</Distance></DWithin></Filter>None";
 				break;
 
 			case MIXARE:
@@ -138,25 +131,6 @@ public class DataSource {
 						+ Double.toString(alt) + "&radius="
 						+ Double.toString(radius);
 				break;
-
-			case ARENA:
-				ret += "&lat=" + Double.toString(lat) + "&lng="
-						+ Double.toString(lon);
-				break;
-
-			case OSM:
-				ret += DataConvertor.getOSMBoundingBox(lat, lon, radius);
-				break;
-				
-			case PANORAMIO:
-				final float minLong = (float) (lon - radius / 100.0);
-				final float minLat = (float) (lat - radius / 100.0);
-				final float maxLong = (float) (lon + radius / 100.0);
-				final float maxLat = (float) (lat + radius / 100.0);
-				ret += "?set=public&from=0&to="
-						+ PanoramioDataProcessor.MAX_JSON_OBJECTS + "&minx="
-						+ minLong + "&miny=" + minLat + "&maxx=" + maxLong
-						+ "&maxy=" + maxLat + "&size=thumbnail&mapfilter=true";
 			}
 
 		}
@@ -215,19 +189,10 @@ public class DataSource {
 	public int getColor() {
 		int ret;
 		switch (this.type) {
-		case GLO:
+		case GloPoint:
 			ret = Color.GREEN;
 			break;
-		case TWITTER:
-			ret = Color.rgb(50, 204, 255);
-			break;
-		case WIKIPEDIA:
-			ret = Color.RED;
-			break;
-		case ARENA:
-			ret = Color.RED;
-			break;
-		case PANORAMIO:
+		case GloPolygon:
 			ret = Color.GREEN;
 			break;
 		default:
@@ -240,29 +205,11 @@ public class DataSource {
 	public int getDataSourceIcon() {
 		int ret;
 		switch (this.type) {
-		case GLO:
+		case GloPoint:
 			ret = R.drawable.glo;
 			break;
-		case TWITTER:
-			ret = R.drawable.twitter;
-			break;
-		case OSM:
-			ret = R.drawable.osm;
-			break;
-		case WIKIPEDIA:
-			ret = R.drawable.wikipedia;
-			break;
-		case ARENA:
-			ret = R.drawable.arena;
-			break;
-		case PANORAMIO:
-			// ret = R.drawable.ic_launcher;
-			/*
-			 * Logo from http://www.tilo-hensel.de/free-glossy-community-icons
-			 * Created by Tilo Hensel licensed under
-			 * http://creativecommons.org/licenses/by-nc-sa/3.0/
-			 */
-			 ret = R.drawable.panoramio;
+		case GloPolygon:
+			ret = R.drawable.glo;
 			break;
 		default:
 			ret = R.drawable.ic_launcher;
@@ -338,7 +285,7 @@ public class DataSource {
 	/* ENUM */
 	
 	public enum TYPE {
-		GLO, MIXARE, WIKIPEDIA, TWITTER, OSM, PANORAMIO, ARENA
+		GloPoint, GloPolygon, MIXARE
 	};
 
 	public enum DISPLAY {

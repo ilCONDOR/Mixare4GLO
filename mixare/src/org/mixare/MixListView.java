@@ -7,7 +7,6 @@ import org.mixare.data.DataHandler;
 import org.mixare.lib.MixUtils;
 import org.mixare.lib.marker.Marker;
 import org.mixare.map.GoogleMapV2;
-import org.mixare.map.MixMap;
 import org.mixare.sectionedlist.Item;
 import org.mixare.sectionedlist.SectionItem;
 
@@ -511,7 +510,7 @@ public class MixListView extends SherlockActivity {
 				MarkerInfo markerInfo = ((EntryItem) getItem((Integer) v
 						.getTag())).getMarkerInfo();
 
-				Intent startMap = new Intent(MixListView.this, MixMap.class);
+				Intent startMap = new Intent(MixListView.this, GoogleMapV2.class);
 				startMap.putExtra("center", true);
 				startMap.putExtra("latitude", markerInfo.getLatitude());
 				startMap.putExtra("longitude", markerInfo.getLongitude());
