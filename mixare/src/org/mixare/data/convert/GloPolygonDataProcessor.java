@@ -41,7 +41,7 @@ import android.util.Log;
 
 public class GloPolygonDataProcessor extends DataHandler implements DataProcessor {
 	
-	public static LatLng[] polygonCoordinates = new LatLng[50];
+	private static List<LatLng[]> polygonCoordinatesList = new ArrayList<LatLng[]>();
 
 	@Override
 	public String[] getUrlMatch() {
@@ -73,7 +73,6 @@ public class GloPolygonDataProcessor extends DataHandler implements DataProcesso
 		StringBuilder descriptions = new StringBuilder();
 		StringBuilder URLs = new StringBuilder();
 		StringBuilder meanings = new StringBuilder();
-		String[] singleEffectiveCoordinates = null;
 		
 		try {
 			XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -96,7 +95,7 @@ public class GloPolygonDataProcessor extends DataHandler implements DataProcesso
 		        	    titles.append(parser.nextText()+"\n");
 		            }
 	        	    if(parser.getName().equals("ms:description")){
-		        	    descriptions.append(parser.nextText()+"\n");         // not used by Mixare
+		        	    descriptions.append(parser.nextText()+"\n");
 	        	    }
 	        	    if(parser.getName().equals("ms:url")){
 		        	    URLs.append(parser.nextText()+"\n");
@@ -121,36 +120,43 @@ public class GloPolygonDataProcessor extends DataHandler implements DataProcesso
 	        for (int i = 2; i < singleCoordinates.length; i=i+2){
 	        	  effectiveCoordinates[j] = singleCoordinates[i];
 	        	  j++;
-	        }
+	        }    
 	        
-	        // get single par of lat lng coordinates
-	        for (int k = 0; k < effectiveCoordinates.length; k++){
-	        	singleEffectiveCoordinates = effectiveCoordinates[k].split(" ");
-	        }	
-	        
-	        for (int l = 0; l < singleEffectiveCoordinates.length; l++){
-	        	String[] tempString = new String[2];
-	        	tempString = singleEffectiveCoordinates[l].split(",");
-	        	Double lng = Double.parseDouble(tempString[0]);
-	        	Double lat = Double.parseDouble(tempString[1]);
-	        	LatLng tempLatLng = new LatLng(lat,lng);
-	        	polygonCoordinates[l] = tempLatLng;
+	        for (int i = 0; i < effectiveCoordinates.length; i++){
+	        	String[] temp = effectiveCoordinates[i].toString().split(" ");
+	        	for (int k = 0; k < singleID.length; k++){
+	        		LatLng[] polygonCoordinates = new LatLng[50];
+			        for (int l = 0; l < temp.length; l++){
+			        	String[] coordinateString = new String[2];
+	 		        	coordinateString = temp[l].split(",");
+			        	Double lng = Double.parseDouble(coordinateString[0]);
+			        	Double lat = Double.parseDouble(coordinateString[1]);
+			        	LatLng tempLatLng = new LatLng(lat,lng);
+			        	polygonCoordinates[l] = tempLatLng;
+			        	if (l == temp.length -1){
+			        		polygonCoordinatesList.add(polygonCoordinates);
+			        	}
+			        }
+	        	}
 	        }
- 
+      
 	        //logging for debugging 
-	        Log.v("singleCoordinates", TextUtils.join("\n", effectiveCoordinates));
-	        Log.v("abc", TextUtils.join("\n", singleEffectiveCoordinates));
-	        /*Log.v("singleAltitude", altitudes.toString());
+	        /*Log.v("singleCoordinates", TextUtils.join("\n", effectiveCoordinates));
 	        Log.v("singleID", IDs.toString());
 	        Log.v("singleTitle", titles.toString());
 	        Log.v("singleDescription", descriptions.toString());
 	        Log.v("singleMeaning", meanings.toString());
-	        Log.v("singleURL", URLs.toString());   */ 
+	        Log.v("singleURL", URLs.toString());*/
 	        
 		} catch (Exception e) {
 			Log.e("exception",e.toString());
 		}
 		return null;
+	}
+	
+	// returns the list of LatLng coordinates of all polygons
+	public static List<LatLng[]> getPolygonCoordinates(){
+		return polygonCoordinatesList;
 	}
 }
 			

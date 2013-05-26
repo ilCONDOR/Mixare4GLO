@@ -1,6 +1,9 @@
 package org.mixare.map;
 
 import android.os.Bundle;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import org.mixare.R;
@@ -21,41 +24,37 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
-import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
+import com.google.android.maps.GeoPoint;
 
 
 
-public class GoogleMapV2 extends Activity implements OnMapClickListener, OnMapLongClickListener, OnMarkerClickListener{ 
+public class GoogleMapV2 extends Activity implements OnMapClickListener, OnMarkerClickListener{ 
 	
 	private static Context context;
 	private DataView dataView;
 
 	private UiSettings UISettings;
-
+    
 	private GoogleMap myMap;
-	private Polygon polygon;
-
+	List<PolygonOptions> polygonOptionsList = new ArrayList<PolygonOptions>();
 	
 	// creates the activity 
 	protected void onCreate(Bundle savedInstanceState) {
 		  
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.googlemapsv2);
-	    
-	    context = this;
-	    dataView = MixView.getDataView();
 	    
 	    // getting the map
 	    MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
@@ -86,18 +85,7 @@ public class GoogleMapV2 extends Activity implements OnMapClickListener, OnMapLo
 	    
 	    //click on marker enabled
 	    myMap.setOnMarkerClickListener(this);
-	   
-	    // creating the marker v2 based on marker v1
-	    int numberMarkersV1 = getMarkersCountV1();
-	    for (int i=0;i<numberMarkersV1; i++){
-	    	POIMarker testMarker = getMarkerV1(i);
-	        LatLng positionMarker = new LatLng(testMarker.getLatitude(), testMarker.getLongitude());
-	        String URL = testMarker.getURL();
-	    	Marker markerV1 = myMap.addMarker(new MarkerOptions()
-    		.position(positionMarker)
-    		//.icon(BitmapDescriptorFactory.fromResource(R.drawable.glo))
-    		.snippet(URL));
-	    } 
+	    
 	    
 	    // move the camera instantly to my location with a zoom of 10
 	    LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -105,10 +93,13 @@ public class GoogleMapV2 extends Activity implements OnMapClickListener, OnMapLo
 	    Location location = service.getLastKnownLocation(provider);
 	    myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(),location.getLongitude()), 10));
 
-	    // drawing the polygon on map
-	    polygon = myMap.addPolygon(createPolygonOptions().strokeColor(Color.RED).strokeWidth(5));
+	    //drawing the points on map
+	    drawPoints();
 	    
-	  }
+	    // drawing the polygons on map 
+    	drawPolygons();
+	 }
+
 
 	 // activity lifecycle methods
 	 protected void onResume() {
@@ -166,6 +157,24 @@ public class GoogleMapV2 extends Activity implements OnMapClickListener, OnMapLo
         myMap.setMapType(mapType);
         return true;
     }
+	
+	// open web page of clicked marker
+	public boolean onMarkerClick(Marker marker) {
+		String URL = marker.getSnippet().toString();
+		String newURL = MixUtils.parseAction(URL);
+				try {
+					dataView.getContext().getWebContentManager().loadWebPage(newURL, context);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		return true;
+	}
+	
+	@Override
+	public void onMapClick(LatLng point) {
+		//Toast.makeText(getApplicationContext(),"The Location is inside of the Area", Toast.LENGTH_LONG).show();
+	}
+	
 
 	public void onLocationChanged(Location location) {
 		// TODO Auto-generated method stub
@@ -187,29 +196,7 @@ public class GoogleMapV2 extends Activity implements OnMapClickListener, OnMapLo
 		
 	}
 
-	@Override
-	public void onMapClick(LatLng point) {
-		// TODO Auto-generated method stub
-	}
-	
-	@Override
-	public void onMapLongClick(LatLng point) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	// open web page of clicked marker
-	public boolean onMarkerClick(Marker marker) {
-		String URL = marker.getSnippet().toString();
-		String newURL = MixUtils.parseAction(URL);
-				try {
-					dataView.getContext().getWebContentManager().loadWebPage(newURL, context);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-		return true;
-	}
-	
+
 	
 	
 	
@@ -235,17 +222,51 @@ public class GoogleMapV2 extends Activity implements OnMapClickListener, OnMapLo
 		return markerV1 = (POIMarker) dataView.getDataHandler().getMarker(index);
 	}
 	
+	 // creating the marker v2 based on marker v1
+	private void drawPoints(){
+		context = this;
+	    dataView = MixView.getDataView();
+		int numberMarkersV1 = getMarkersCountV1();
+	    for (int i=0;i<numberMarkersV1; i++){
+	    	POIMarker testMarker = getMarkerV1(i);
+	        LatLng positionMarker = new LatLng(testMarker.getLatitude(), testMarker.getLongitude());
+	        String URL = testMarker.getURL();
+	    	Marker markerV1 = myMap.addMarker(new MarkerOptions().position(positionMarker).snippet(URL));
+	    }
+	}
+   
+		
 	// create polygon options getting data from GloPolygonDataProcessor
-	private PolygonOptions createPolygonOptions(){
-		PolygonOptions polygonOptions = new PolygonOptions();
+	private List<PolygonOptions> createPolygonOptionsList(){
+		List<PolygonOptions> polygonOptionsList = new ArrayList<PolygonOptions>();
 		LatLng[] polygonCoordinates = new LatLng[50];
-		polygonCoordinates = GloPolygonDataProcessor.polygonCoordinates;
-		for (int i=0; i<polygonCoordinates.length; i++){
-			if (polygonCoordinates[i] == null){
-				break;
+		List<LatLng[]> polygonCoordinatesList = new ArrayList<LatLng[]>();
+		
+		polygonCoordinatesList = GloPolygonDataProcessor.getPolygonCoordinates();
+		
+		for (int i=0; i<polygonCoordinatesList.size(); i++){
+			PolygonOptions polygonOptions = new PolygonOptions();
+			polygonCoordinates = polygonCoordinatesList.get(i);
+			for (int j=0; j<polygonCoordinates.length; j++){
+				if (polygonCoordinates[j] == null){
+					break;
+				}
+				polygonOptions.add(new LatLng(polygonCoordinates[j].latitude,polygonCoordinates[j].longitude));
 			}
-			polygonOptions.add(new LatLng(polygonCoordinates[i].latitude,polygonCoordinates[i].longitude));
+			polygonOptionsList.add(polygonOptions);
 		}
-		return polygonOptions;
-	} 
+		return polygonOptionsList;	
+	}
+	
+	// draw polygons with data received from createPolygonOptions()
+	private void drawPolygons(){
+		polygonOptionsList = createPolygonOptionsList();
+		for (int i=0; i<polygonOptionsList.size(); i++){
+    		PolygonOptions polygonOptions = polygonOptionsList.get(i);
+		    polygonOptions.strokeColor(Color.RED);
+		    polygonOptions.strokeWidth(5);
+		    myMap.addPolygon(polygonOptions);
+	    }
+	}
 }
+ 
