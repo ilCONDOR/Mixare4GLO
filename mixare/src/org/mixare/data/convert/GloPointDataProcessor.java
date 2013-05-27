@@ -125,13 +125,13 @@ public class GloPointDataProcessor extends DataHandler implements DataProcessor 
 	        }
  
 	        //logging for debugging 
-	        Log.v("singleCoordinates", TextUtils.join("\n", singleCoordinatesFiltered));
+	        /*Log.v("singleCoordinates", TextUtils.join("\n", singleCoordinatesFiltered));
 	        Log.v("singleAltitude", altitudes.toString());
 	        Log.v("singleID", IDs.toString());
 	        Log.v("singleTitle", titles.toString());
 	        Log.v("singleDescription", descriptions.toString());
 	        Log.v("singleMeaning", meanings.toString());
-	        Log.v("singleURL", URLs.toString());    
+	        Log.v("singleURL", URLs.toString());*/    
 
 	        
 	        // creating the POIs

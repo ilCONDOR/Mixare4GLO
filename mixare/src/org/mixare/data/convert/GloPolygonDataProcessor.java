@@ -42,6 +42,11 @@ import android.util.Log;
 public class GloPolygonDataProcessor extends DataHandler implements DataProcessor {
 	
 	private static List<LatLng[]> polygonCoordinatesList = new ArrayList<LatLng[]>();
+	private static String[] singleID;
+	private static String[] singleTitle;
+	private static String[] singleDescription;
+	private static String[] singleMeaning;
+	private static String[] singleURL;
 
 	@Override
 	public String[] getUrlMatch() {
@@ -108,11 +113,12 @@ public class GloPolygonDataProcessor extends DataHandler implements DataProcesso
 	        }
 	        
 	        String[] singleCoordinates = coordinates.toString().split("\n");
-	        String[] singleID = IDs.toString().split("\n");
-	        String[] singleTitle = titles.toString().split("\n");
-	        String[] singleDescription = descriptions.toString().split("\n");
-	        String[] singleMeaning = meanings.toString().split("\n");
-	        String[] singleURL = URLs.toString().split("\n");
+	        singleID = IDs.toString().split("\n");
+	        singleTitle = titles.toString().split("\n");
+	        singleDescription = descriptions.toString().split("\n");
+	        singleMeaning = meanings.toString().split("\n");
+	        singleURL = URLs.toString().split("\n");
+	        
 	        
 	        // filter out only coordinates of real geographic object (discard other coordinates)
 	        String[] effectiveCoordinates = new String[singleID.length];
@@ -124,6 +130,7 @@ public class GloPolygonDataProcessor extends DataHandler implements DataProcesso
 	        
 	        for (int i = 0; i < effectiveCoordinates.length; i++){
 	        	String[] temp = effectiveCoordinates[i].toString().split(" ");
+	        	singleURL[i] = "webpage:"+singleURL[i];                           // for the GLO list to display url
 	        	for (int k = 0; k < singleID.length; k++){
 	        		LatLng[] polygonCoordinates = new LatLng[50];
 			        for (int l = 0; l < temp.length; l++){
@@ -141,12 +148,12 @@ public class GloPolygonDataProcessor extends DataHandler implements DataProcesso
 	        }
       
 	        //logging for debugging 
-	        /*Log.v("singleCoordinates", TextUtils.join("\n", effectiveCoordinates));
+	        Log.v("singleCoordinates", TextUtils.join("\n", effectiveCoordinates));
 	        Log.v("singleID", IDs.toString());
 	        Log.v("singleTitle", titles.toString());
 	        Log.v("singleDescription", descriptions.toString());
 	        Log.v("singleMeaning", meanings.toString());
-	        Log.v("singleURL", URLs.toString());*/
+	        Log.v("singleURL", URLs.toString());
 	        
 		} catch (Exception e) {
 			Log.e("exception",e.toString());
@@ -157,6 +164,26 @@ public class GloPolygonDataProcessor extends DataHandler implements DataProcesso
 	// returns the list of LatLng coordinates of all polygons
 	public static List<LatLng[]> getPolygonCoordinates(){
 		return polygonCoordinatesList;
+	}
+	
+	public static String[] getIDList(){
+		return singleID;
+	}
+	
+	public static String[] getTitleList(){
+		return singleTitle;
+	}
+	
+	public static String[] getDescriptionList(){
+		return singleDescription;
+	}
+	
+	public static String[] getMeaningList(){
+		return singleMeaning;
+	}
+	
+	public static String[] getURLList(){
+		return singleURL;
 	}
 }
 			

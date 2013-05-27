@@ -16,6 +16,6 @@
     </item>
     <item>
             <item android:id="@+id/listview"
-                  android:title="ListView"/>
+                  android:title="GLO List"/>
     </item>
 </menu>

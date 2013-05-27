@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.mixare.data.DataHandler;
+import org.mixare.data.DataSource;
+import org.mixare.data.convert.GloPolygonDataProcessor;
 import org.mixare.lib.MixUtils;
 import org.mixare.lib.marker.Marker;
 import org.mixare.map.GoogleMapV2;
@@ -14,6 +16,7 @@ import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.SpannableString;
@@ -34,6 +37,7 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.google.android.gms.maps.model.LatLng;
 
 public class MixListView extends SherlockActivity {
 	private static final int MENU_MAPVIEW_ID = 0;
@@ -177,13 +181,30 @@ public class MixListView extends SherlockActivity {
 	 * @return The list containing Item's to display
 	 */
 	private List<Item> createList(String query) {
-		List<Item> list = new ArrayList<Item>();
+		List<Item> listAll = new ArrayList<Item>();
+		List<Item> listPoints = new ArrayList<Item>();
+		List<Item> listPolygons = new ArrayList<Item>();
+		
 		DataHandler dataHandler = dataView.getDataHandler();
-		String lastSection = "";
-		int lastSectionId = -1;
-		int markerCount = 0;
-		int sectionCount = 0;
+		
+		String[] ids = GloPolygonDataProcessor.getIDList();
+        String[] titles = GloPolygonDataProcessor.getTitleList();
+        String[] urls = GloPolygonDataProcessor.getURLList();
+        List<LatLng[]> coordinates = GloPolygonDataProcessor.getPolygonCoordinates();
+        
+        int sectionAll = 0;
+        
+		String lastSectionPoints = "";
+		int lastSectionIdPoints = -1;
+		int pointCount = 0;
+		int sectionCountPoints = 0;
+		
+		String lastSectionPolygons = "";
+        int lastSectionIdPolygons = -1;
+        int polygonCount = 0;
+        int sectionCountPolygons = 0;
 
+        // create list of points
 		for (int i = 0; i < dataHandler.getMarkerCount(); i++) {
 			Marker marker = dataHandler.getMarker(i);
 
@@ -196,49 +217,96 @@ public class MixListView extends SherlockActivity {
 			}
 
 			// Create MarkerInfo and the section string
-			MarkerInfo markerInfo = new MarkerInfo(marker.getTitle(),
+			MarkerInfo pointInfo = new MarkerInfo(marker.getTitle(),
 					marker.getURL(), marker.getDistance(),
 					marker.getLatitude(), marker.getLongitude(),
 					marker.getColor());
-			String markerSection = getSection(marker.getDistance());
+			String pointsSection = getSection(marker.getDistance());
 
 			// If the lastSection is not equal to this Section create a new
 			// Section before creating the new Entry
-			if (!markerSection.equals(lastSection)) {
-				if (lastSectionId != -1) {
-					((SectionItem) list.get(lastSectionId))
-							.setMarkerCount(markerCount);
-					markerCount = 0;
+			if (!pointsSection.equals(lastSectionPoints)) {
+				if (lastSectionIdPoints != -1) {
+					((SectionItem) listPoints.get(lastSectionIdPoints))
+							.setMarkerCount(pointCount);
+					pointCount = 0;
 				}
-				SectionItem section = new SectionItem(markerSection);
-				list.add(section);
-				lastSectionId = list.size() - 1;
-				lastSection = markerSection;
-				sectionCount++;
+				SectionItem section = new SectionItem(pointsSection);
+				listPoints.add(section);
+				lastSectionIdPoints = listPoints.size() - 1;
+				lastSectionPoints = pointsSection;
+				sectionCountPoints++;
+				sectionAll++;
 			}
 
 			// Add the EntryItem to the list
-			EntryItem entry = new EntryItem(markerInfo);
-			list.add(entry);
-			markerCount++;
+			EntryItem entry = new EntryItem(pointInfo);
+			listPoints.add(entry);
+			pointCount++;
 		}
-
-		if (lastSectionId != -1) {
-			((SectionItem) list.get(lastSectionId)).setMarkerCount(markerCount);
+		
+		if (lastSectionIdPoints != -1) {
+			((SectionItem) listPoints.get(lastSectionIdPoints)).setMarkerCount(pointCount);
 		}
-
-		if (list.size() == 0) {
+		
+		
+		// create list of polygons
+        for (int k = 0; k < ids.length; k++) {
+        	
+        	// Check the query
+			if (query != null) {
+				if (titles[0].toLowerCase()
+						.indexOf(query.toLowerCase().trim()) < 0) {
+					continue;
+				}
+			}
+			
+	        LatLng[] temp = coordinates.get(k);
+	    	MarkerInfo polygonInfo = new MarkerInfo(titles[k], urls[k], 0.0, temp[0].latitude, temp[1].longitude, Color.GREEN);
+	    	String polygonsSection = getSection(0);
+	    
+	    	// If the lastSection is not equal to this Section create a new
+			// Section before creating the new Entry
+			if (!polygonsSection.equals(lastSectionPolygons)) {
+				if (lastSectionIdPolygons != -1) {
+					((SectionItem) listPolygons.get(lastSectionIdPolygons))
+							.setMarkerCount(polygonCount);
+					polygonCount = 0;
+				}
+				SectionItem section = new SectionItem(polygonsSection);
+				listPolygons.add(section);
+				lastSectionIdPolygons = listPolygons.size() - 1;
+				lastSectionPolygons = polygonsSection;
+				sectionCountPolygons++;
+				sectionAll++;
+			}
+	    	
+	    	EntryItem entry = new EntryItem(polygonInfo);
+	    	listPolygons.add(entry);
+	    	polygonCount++;
+        }
+        
+        if (lastSectionIdPolygons != -1) {
+			((SectionItem) listPolygons.get(lastSectionIdPolygons)).setMarkerCount(polygonCount);
+		}
+        
+        
+        listAll.addAll(listPoints);
+        listAll.addAll(listPolygons);
+        
+        
+        if (listAll.size() == 0) {
 			SectionItem noResultFound = new SectionItem(
 					getString(R.string.list_view_search_no_result));
-			list.add(noResultFound);
-			sectionCount++;
+			listAll.add(noResultFound);
+			sectionAll++;
 		}
 
 		getSupportActionBar().setSubtitle(
 				getString(R.string.list_view_total_markers)
-						+ (list.size() - sectionCount));
-
-		return list;
+						+ (listAll.size() - sectionAll));
+        
+		return listAll;
 	}
 
 	/**
@@ -483,19 +551,19 @@ public class MixListView extends SherlockActivity {
 
 			return convertView;
 		}
-		
+
 		private class SectionViewHolder {
 			TextView title;
 			TextView markerCount;
 		}
-		
+
 		private class ViewHolder {
 			View sideBar;
 			TextView title;
 			TextView desc;
 			ImageButton centerMap;
 		}
-		
+
 		public int getCount() {
 			return items.size();
 		};
@@ -526,13 +594,14 @@ public class MixListView extends SherlockActivity {
 			public OnClickListenerWebView (int position) {
 				this.position = position;
 			}
-			
+
 			@Override
 			public void onClick(View v) {
 				MarkerInfo markerInfo = ((EntryItem) getItem(position))
 						.getMarkerInfo();
 
 				String selectedURL = markerInfo.getUrl();
+		    	
 				if (selectedURL != null) {
 					try {
 						if (selectedURL.startsWith("webpage")) {

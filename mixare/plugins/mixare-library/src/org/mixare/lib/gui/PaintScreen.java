@@ -98,13 +98,13 @@ public class PaintScreen implements Parcelable, GLSurfaceView.Renderer {
 
 		try {
 			// Load default models
-			InputStream in = ((Context) app).getAssets().open("marker.obj");           // .obj created with Blender software
-			InputStream in2 = ((Context) app).getAssets().open("triangle2.obj");
-			InputStream in3 = ((Context) app).getAssets().open("arrow3.obj");
-
-			arrow = new ObjReader((Context) app).readMesh(in3);
-			triangle = new ObjReader((Context) app).readMesh(in2);
+			InputStream in = ((Context) app).getAssets().open("sphere.obj");           // .obj created with Blender software
+			InputStream in2 = ((Context) app).getAssets().open("sphere.obj");
+			InputStream in3 = ((Context) app).getAssets().open("sphere.obj");
+			
 			poi = new ObjReader((Context) app).readMesh(in);
+			triangle = new ObjReader((Context) app).readMesh(in2);
+			arrow = new ObjReader((Context) app).readMesh(in3);
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ModelLoadException e) {
@@ -836,9 +836,9 @@ public class PaintScreen implements Parcelable, GLSurfaceView.Renderer {
 				Model3D circleModel = new Model3D();
 
 				circleModel.setDistance(90); 
-				circleModel.setSchaal(20);                 // movement of the circle on the same axis
+				circleModel.setSchaal(20);               // movement of the circle on the same axis
 				circleModel.setObj(id);
-				circleModel.setColor(0x00FF00);  		  // blue
+				circleModel.setColor(0x00FF00);  		   // green
 				circleModel.setxPos(x);
 				circleModel.setyPos(y);
 				paint3DModel(circleModel);

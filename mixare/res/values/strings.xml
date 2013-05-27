@@ -13,13 +13,8 @@
     <string name="NW">NW</string>
     
     <string name="GLO">Geographic Learning Objects</string>
-    <string name="OSM">Openstreetmap</string>
     <string name="MIXARE">Mixare</string>
-    <string name="TWITTER">Twitter</string>
-    <string name="PANORAMIO">Panoramio</string>
-    <string name="WIKIPEDIA">Wikipedia</string>
-    <string name="ARENA">Arena</string>
-    
+  
     <string name="CIRCLE_MARKER">Circles</string>
     <string name="NAVIGATION_MARKER">Arrows</string>
     <string name="IMAGE_MARKER">Images</string>
@@ -46,13 +41,13 @@
 		
 	<string name="menu_item_1">Data Source</string>
 	<!--  <string name="menu_item_2">Plugins</string>-->
-	<string name="menu_item_2">List view</string>
-	<string name="menu_item_3">Map view</string>
-	<string name="menu_item_4">Zoom level</string>
+	<string name="menu_item_2">List View</string>
+	<string name="menu_item_3">Map View</string>
+	<string name="menu_item_4">Zoom Level</string>
 	<string name="menu_item_5">Search</string>
-	<string name="menu_item_6">Info</string>
+	<string name="menu_item_6">GPS Info</string>
 	<string name="menu_item_7">License</string>
-	<string name="menu_item_8">Refresh</string>
+	<string name="menu_item_8">Get Data</string>
 
 	<string name="cancel">Cancel</string>
 
@@ -88,7 +83,6 @@
 
 	<string name="map_menu_normal_mode">Map</string>
 	<string name="map_menu_satellite_mode">Satellite</string>
-	<string name="map_menu_map_osm">Open Street Map</string>
 	<string name="map_menu_map_google">Google Maps</string>
 	<string name="map_menu_cam_mode">Camera</string>
 	<string name="map_my_location">My Location</string>
@@ -100,9 +94,6 @@
 	<string name="data_source_add">Add data source</string>
 	<string name="data_source_edit">Edit data source</string>
 	<string name="data_source_delete">Delete data source</string>
-	<string name="data_source_change_wikipedia">Changed to Wikipedia as data source</string>
-	<string name="data_source_change_twitter">Changed to Twitter as data source</string>
-	<string name="data_source_change_osm">Changed to OpenStreetMap as data source</string>
 
 	<string name="search_failed_notification">No search results</string>
 	<string name="source_openstreetmap">Stations around</string>
@@ -112,10 +103,6 @@
 	<string name="download_error">Error while downloading</string>
 	<string name="download_received">Received data from</string>
 
-	<string name="add_osm_menu">Add OpenStreetMap URL</string>
-	<string name="insert_osm_url">Insert OpenStreetMap URL</string>
-	<string name="osm_max_object_menu">Set max POI per URL</string>
-	<string name="set_osm_max_object">Maximum POIs per URL</string>
 	<string name="location_not_found">Location not found, make sure you enabled Wifi location or GPS in the settings.</string>
 	<string name="refreshing">Refreshing</string>
 	<string name="select_plugin">Find new Plugins</string>
@@ -131,8 +118,8 @@
 	<string name="dataselector">Dataselector</string>
 	<string name="datahandler">Datahandler</string>
 	
-	<string name="list_view_total_markers">Total markers: </string>
-	<string name="list_view_marker_in_section">Markers:</string>
+	<string name="list_view_total_markers">Total Geographic Learning Objects: </string>
+	<string name="list_view_marker_in_section">Geographic Learning Objects:</string>
 	<string name="list_view_search_no_result">No result found</string>
 	<string name="list_view_no_plugins_available">No plugins installed</string>
 	<string name="list_view_search_hint">Search</string>
@@ -140,7 +127,7 @@
 	<string name="add_datasource">Add Datasource</string>
 	<string name="datasource_list">Datasources</string>
 	<string name="plugin_list">Plugins</string>
-	<string name="mix_list_view">Markerlist</string>
+	<string name="mix_list_view">Geographic Learning Objects List</string>
 	
 	<string name="list_view_section"></string>
 	<string name="list_view_entry"></string>
