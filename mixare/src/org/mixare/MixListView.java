@@ -40,6 +40,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.google.android.gms.maps.model.LatLng;
 
 public class MixListView extends SherlockActivity {
+	protected List<EntryItem> allEntryItems = new ArrayList<EntryItem>();
 	private static final int MENU_MAPVIEW_ID = 0;
 	private static final int MENU_SEARCH_ID = 1;
 	private Context ctx;
@@ -189,6 +190,7 @@ public class MixListView extends SherlockActivity {
 		
 		String[] ids = GloPolygonDataProcessor.getIDList();
         String[] titles = GloPolygonDataProcessor.getTitleList();
+        String[] meanings = GloPolygonDataProcessor.getMeaningList();
         String[] urls = GloPolygonDataProcessor.getURLList();
         List<LatLng[]> coordinates = GloPolygonDataProcessor.getPolygonCoordinates();
         
@@ -217,7 +219,7 @@ public class MixListView extends SherlockActivity {
 			}
 
 			// Create MarkerInfo and the section string
-			MarkerInfo pointInfo = new MarkerInfo(marker.getTitle(),
+			MarkerInfo pointInfo = new MarkerInfo(marker.getTitle(), marker.getMeaning(),
 					marker.getURL(), marker.getDistance(),
 					marker.getLatitude(), marker.getLongitude(),
 					marker.getColor());
@@ -242,6 +244,7 @@ public class MixListView extends SherlockActivity {
 			// Add the EntryItem to the list
 			EntryItem entry = new EntryItem(pointInfo);
 			listPoints.add(entry);
+			allEntryItems.add(entry);
 			pointCount++;
 		}
 		
@@ -263,7 +266,7 @@ public class MixListView extends SherlockActivity {
 			}
 			
 	        LatLng[] temp = coordinates.get(k);
-	    	MarkerInfo polygonInfo = new MarkerInfo(titles[k], urls[k], 0.0, temp[0].latitude, temp[1].longitude, Color.GREEN);
+	    	MarkerInfo polygonInfo = new MarkerInfo(titles[k], meanings[k], urls[k], 0.0, temp[0].latitude, temp[1].longitude, Color.GREEN);
 	    	String polygonsSection = getSection(0);
 	    
 	    	// If the lastSection is not equal to this Section create a new
@@ -284,6 +287,7 @@ public class MixListView extends SherlockActivity {
 	    	
 	    	EntryItem entry = new EntryItem(polygonInfo);
 	    	listPolygons.add(entry);
+	    	allEntryItems.add(entry);
 	    	polygonCount++;
         }
 		}
@@ -354,6 +358,7 @@ public class MixListView extends SherlockActivity {
 	 */
 	private class MarkerInfo {
 		private String title;
+		private String meaning;
 		private String url;
 		private Double dist;
 		private Double latitude;
@@ -374,9 +379,10 @@ public class MixListView extends SherlockActivity {
 		 * @param longitude
 		 *            The longitude of the marker
 		 */
-		public MarkerInfo(String title, String url, Double dist,
+		public MarkerInfo(String title, String meaning, String url, Double dist,
 				Double latitude, Double longitude, int color) {
 			this.title = title;
+			this.meaning = meaning;
 			this.url = url;
 			this.dist = dist;
 			this.latitude = latitude;
@@ -386,6 +392,10 @@ public class MixListView extends SherlockActivity {
 
 		public String getTitle() {
 			return title;
+		}
+		
+		public String getMeaning(){
+			return meaning;
 		}
 
 		public String getUrl() {
@@ -531,6 +541,7 @@ public class MixListView extends SherlockActivity {
 					EntryItem item = (EntryItem) i;
 
 					MarkerInfo markerInfo = item.getMarkerInfo();
+					
 					SpannableString spannableString = new SpannableString(
 							markerInfo.getTitle());
 
@@ -547,7 +558,12 @@ public class MixListView extends SherlockActivity {
 					holder.centerMap
 							.setOnClickListener(onClickListenerCenterMap);
 					holder.title.setText(spannableString);
-					holder.desc.setText(Math.round(markerInfo.getDist()) + "m");
+					//holder.desc.setText(Math.round(markerInfo.getDist()) + "m");	
+					for (int z=0; z<allEntryItems.size(); z++){
+						if(markerInfo.getTitle().trim().equalsIgnoreCase((allEntryItems.get(z)).getMarkerInfo().getTitle().trim())){
+							holder.desc.setText(Math.round(markerInfo.getDist()) + "m" + "----" + (allEntryItems.get(z)).getMarkerInfo().getMeaning());
+						}
+					}				
 				}
 			}
 

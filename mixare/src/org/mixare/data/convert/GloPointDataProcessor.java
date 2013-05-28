@@ -143,7 +143,8 @@ public class GloPointDataProcessor extends DataHandler implements DataProcessor 
 
 		        	ma = new POIMarker(
 							singleID[i],
-							HtmlUnescape.unescapeHTML(singleTitle[i]), 
+							HtmlUnescape.unescapeHTML(singleTitle[i]),
+							singleMeaning[i],
 							latAsDouble, 
 							lngAsDouble, 
 							altAsDouble, 

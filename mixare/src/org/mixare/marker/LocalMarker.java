@@ -51,6 +51,7 @@ public abstract class LocalMarker implements Marker {
 
 	private String ID;
 	protected String title;
+	protected String meaning;
 	protected boolean underline = false;
 	private String URL;
 	protected PhysicalPlace mGeoLoc;
@@ -82,13 +83,14 @@ public abstract class LocalMarker implements Marker {
 
 	public Label txtLab = new Label();
 	
-	public LocalMarker(final String id, String title, final double latitude,
+	public LocalMarker(final String id, String title, String meaning, final double latitude,
 			double longitude, final double altitude, final String link,
 			int type, final int color) {
 		super();
 
 		this.active = false;
 		this.title = title;
+		this.meaning = meaning;
 		this.mGeoLoc = (new PhysicalPlace(latitude, longitude, altitude));
 		if (link != null && link.length() > 0) {
 			try {
@@ -146,16 +148,14 @@ public abstract class LocalMarker implements Marker {
 			if (((POIMarker) this).isDirectionMarker()) {
 				getmGeoLoc().setAltitude(curGPSFix.getAltitude());
 			}
-		} else if (type == NavigationMarker.class.getName()) {
-			getmGeoLoc().setAltitude(curGPSFix.getAltitude());
-		} else if (type != NavigationMarker.class.getName()) {
+		} /*else if (type != NavigationMarker.class.getName()) {
 			if (this.getURL() != null && this.getmGeoLoc().getAltitude() == 0.0) {
 				this.getmGeoLoc().setAltitude(
 						Double.valueOf(Elevation.getElevation().calcElevation(
 								curGPSFix.getLatitude(),
 								curGPSFix.getLongitude())));
 			}
-		}
+		}*/
 
 		// compute the relative position vector from user position to POI
 		// location
@@ -220,6 +220,10 @@ public abstract class LocalMarker implements Marker {
 
 	public String getTitle() {
 		return title;
+	}
+	
+	public String getMeaning(){
+		return meaning;
 	}
 
 	public String getURL() {
@@ -337,6 +341,10 @@ public abstract class LocalMarker implements Marker {
 	 */
 	protected void setTitle(String title) {
 		this.title = title;
+	}
+	
+	protected void setMeaning(String meaning){
+		this.meaning = meaning;
 	}
 
 	/**

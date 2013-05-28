@@ -11,7 +11,7 @@
     </datasource>-->
     <datasource id="0" >
         <name>GLO Point</name>
-		<url>http://glo.inf.unibz.it/cgi-bin/mapserv</url>
+		<url>http://glo.inf.unibz.it/cgi-bin/mapserv</url>   <!-- when used change getURLMatch() in GloPolygonParser -->
 		<type>0</type>
         <display>0</display>
         <visible>true</visible>
@@ -27,7 +27,6 @@
         <editable>false</editable>
         <blur>0</blur>
     </datasource>
-    <!-- IMPORTANT FIRST DATA SOURCE OF POINTS OTHERWISE NOT ALL ARE SHOWN IN AR! WHY? -->
     <datasource id="2" >
         <name>altervista</name>
 		<url>http://g3r4.altervista.org/points.gml</url>
@@ -47,3 +46,4 @@
         <blur>0</blur>
     </datasource>
 </datasources>
+<!-- IMPORTANT FIRST DATA SOURCE OF POINTS OTHERWISE NOT ALL ARE SHOWN IN AR! WHY? -->

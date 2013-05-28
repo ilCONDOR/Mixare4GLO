@@ -41,9 +41,9 @@ public class POIMarker extends LocalMarker {
 	public static final int OSM_URL_MAX_OBJECTS = 5;
 	private boolean isDirectionMarker = false;
 
-	public POIMarker(String id, String title, double latitude,
+	public POIMarker(String id, String title, String meaning, double latitude,
 			double longitude, double altitude, String URL, int type, int color) {
-		super(id, title, latitude, longitude, altitude, URL, type, color);
+		super(id, title, meaning, latitude, longitude, altitude, URL, type, color);
 	}
 
 	public boolean isDirectionMarker() {

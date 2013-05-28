@@ -50,7 +50,7 @@ public class GloPolygonDataProcessor extends DataHandler implements DataProcesso
 
 	@Override
 	public String[] getUrlMatch() {
-		String[] str = {"mapserv"};
+		String[] str = {"polygons"};
 		return str;
 	}
 

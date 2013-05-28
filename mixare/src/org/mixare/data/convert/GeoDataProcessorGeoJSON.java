@@ -120,7 +120,8 @@ public class GeoDataProcessorGeoJSON extends DataHandler implements DataProcesso
 
 				ma = new POIMarker(
 						id,
-						HtmlUnescape.unescapeHTML(title), 
+						HtmlUnescape.unescapeHTML(title),
+						meaning,
 						lat, 
 						lng, 
 						0, // elevation to be implemented, 
@@ -139,7 +140,8 @@ public class GeoDataProcessorGeoJSON extends DataHandler implements DataProcesso
 					
 					ma = new POIMarker(
 							id,
-							HtmlUnescape.unescapeHTML(title), 
+							HtmlUnescape.unescapeHTML(title),
+							meaning,
 							lat, 
 							lng, 
 							0, // elevation to be implemented, 

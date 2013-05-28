@@ -70,9 +70,9 @@ public class ImageMarker extends LocalMarker {
 	 * @param int Datasource type
 	 * @param int Color int representation {@link android.graphics.Color Color}
 	 */
-	public ImageMarker(String id, String title, double latitude,
+	public ImageMarker(String id, String title, String meaning, double latitude,
 			double longitude, double altitude, String link, int type, int colour) {
-		super(id, title, latitude, longitude, altitude, link, type, colour);
+		super(id, title, meaning, latitude, longitude, altitude, link, type, colour);
 		this.setImage(Bitmap.createBitmap(10, 10, Config.ARGB_4444)); // TODO
 																		// set
 																		// default
@@ -103,11 +103,11 @@ public class ImageMarker extends LocalMarker {
 	 * @param String
 	 *            Image's url
 	 */
-	public ImageMarker(String id, String title, double latitude,
+	public ImageMarker(String id, String title, String meaning, double latitude,
 			double longitude, double altitude, final String pageLink,
 			final int type, final int colour, final String imageOwner,
 			final String ImageUrl) {
-		super(id, title, latitude, longitude, altitude, pageLink, type, colour);
+		super(id, title, meaning, latitude, longitude, altitude, pageLink, type, colour);
 
 		try {
 

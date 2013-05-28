@@ -36,6 +36,8 @@ import android.location.Location;
 public interface Marker extends Comparable<Marker>{
 
 	String getTitle();
+	
+	String getMeaning();
 
 	String getURL();
 

@@ -314,4 +314,10 @@ public class RemoteMarker implements Marker {
 		}
 	}
 
+	@Override
+	public String getMeaning() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
