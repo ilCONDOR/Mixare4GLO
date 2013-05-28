@@ -50,13 +50,13 @@ public class GloPolygonDataProcessor extends DataHandler implements DataProcesso
 
 	@Override
 	public String[] getUrlMatch() {
-		String[] str = {"polygon"};
+		String[] str = {"mapserv"};
 		return str;
 	}
 
 	@Override
 	public String[] getDataMatch() {
-		String[] str = {"polygon"};
+		String[] str = {"gml:Polygon"};
 		return str;
 	}
 	
@@ -148,12 +148,12 @@ public class GloPolygonDataProcessor extends DataHandler implements DataProcesso
 	        }
       
 	        //logging for debugging 
-	        Log.v("singleCoordinates", TextUtils.join("\n", effectiveCoordinates));
+	        /*Log.v("singleCoordinates", TextUtils.join("\n", effectiveCoordinates));
 	        Log.v("singleID", IDs.toString());
 	        Log.v("singleTitle", titles.toString());
 	        Log.v("singleDescription", descriptions.toString());
 	        Log.v("singleMeaning", meanings.toString());
-	        Log.v("singleURL", URLs.toString());
+	        Log.v("singleURL", URLs.toString());*/
 	        
 		} catch (Exception e) {
 			Log.e("exception",e.toString());

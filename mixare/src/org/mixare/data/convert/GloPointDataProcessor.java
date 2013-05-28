@@ -41,13 +41,13 @@ public class GloPointDataProcessor extends DataHandler implements DataProcessor 
 
 	@Override
 	public String[] getUrlMatch() {
-		String[] str = {"point"};
+		String[] str = {"points"};
 		return str;
 	}
 
 	@Override
 	public String[] getDataMatch() {
-		String[] str = {"point"};
+		String[] str = {"gml:Point"};
 		return str;
 	}
 	

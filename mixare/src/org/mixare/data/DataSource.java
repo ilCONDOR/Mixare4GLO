@@ -122,14 +122,7 @@ public class DataSource {
 				String latitude1 = Double.toString(lat);
 				String longitude1 = Double.toString(lon);
 				//ask for right request link
-				ret += "?map=/home/achow/Desktop/wfs.map&service=wfs&version=1.0.0&request=getfeature&TYPENAME=learning_object&Filter=<Filter><DWithin><PropertyName>geom_id</PropertyName><gml:Point><gml:coordinates>"+longitude1+","+latitude1+"</gml:coordinates></gml:Point><Distance%20units='m'>10</Distance></DWithin></Filter>None";
-				break;
-
-			case MIXARE:
-				ret += "?latitude=" + Double.toString(lat) + "&longitude="
-						+ Double.toString(lon) + "&altitude="
-						+ Double.toString(alt) + "&radius="
-						+ Double.toString(radius);
+				ret += "?map=/home/achow/Desktop/wfs.map&service=wfs&version=1.0.0&request=getfeature&TYPENAME=learning_object_poly&Filter=<Filter><DWithin><PropertyName>geom_id</PropertyName><gml:Point><gml:coordinates>"+longitude1+","+latitude1+"</gml:coordinates></gml:Point><Distance%20units='m'>10</Distance></DWithin></Filter>None";
 				break;
 			}
 

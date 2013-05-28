@@ -61,9 +61,6 @@ public class DataConvertor {
 	
 	public List<Marker> load(String url, String rawResult, DataSource ds){
 		DataProcessor dataProcessor = searchForMatchingDataProcessors(url, rawResult, ds.getType());
-		if(dataProcessor == null){
-			dataProcessor = new GloPointDataProcessor(); //using this as default if nothing is found.
-		}
 		try {
 			return dataProcessor.load(rawResult, ds.getDataSourceId(), ds.getColor());
 		} catch (JSONException e) {
@@ -100,24 +97,7 @@ public class DataConvertor {
 	}
 	
 	private void addDefaultDataProcessors(){
-		//dataProcessors.add(new WikiDataProcessor());
-		//dataProcessors.add(new TwitterDataProcessor());
-		//dataProcessors.add(new OsmDataProcessor());
-		//dataProcessors.add(new PanoramioDataProcessor());
 		dataProcessors.add(new GloPointDataProcessor());
 		dataProcessors.add(new GloPolygonDataProcessor());
-	}
-	
-	public static String getOSMBoundingBox(double lat, double lon, double radius) {
-		String bbox = "[bbox=";
-		PhysicalPlace lb = new PhysicalPlace(); // left bottom
-		PhysicalPlace rt = new PhysicalPlace(); // right top
-		PhysicalPlace.calcDestination(lat, lon, 225, radius*1414, lb); // 1414: sqrt(2)*1000
-		PhysicalPlace.calcDestination(lat, lon, 45, radius*1414, rt);
-		bbox+=lb.getLongitude()+","+lb.getLatitude()+","+rt.getLongitude()+","+rt.getLatitude()+"]";
-		return bbox;
-
-		//return "[bbox=16.365,48.193,16.374,48.199]";
-	}
-	
+	}	
 }

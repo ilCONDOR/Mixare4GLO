@@ -251,6 +251,7 @@ public class MixListView extends SherlockActivity {
 		
 		
 		// create list of polygons
+		if (ids != null){
         for (int k = 0; k < ids.length; k++) {
         	
         	// Check the query
@@ -285,6 +286,7 @@ public class MixListView extends SherlockActivity {
 	    	listPolygons.add(entry);
 	    	polygonCount++;
         }
+		}
         
         if (lastSectionIdPolygons != -1) {
 			((SectionItem) listPolygons.get(lastSectionIdPolygons)).setMarkerCount(polygonCount);
@@ -292,7 +294,7 @@ public class MixListView extends SherlockActivity {
         
         
         listAll.addAll(listPoints);
-        listAll.addAll(listPolygons);
+        if (ids != null){ listAll.addAll(listPolygons); }
         
         
         if (listAll.size() == 0) {
