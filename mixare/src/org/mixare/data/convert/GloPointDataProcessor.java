@@ -41,7 +41,7 @@ public class GloPointDataProcessor extends DataHandler implements DataProcessor 
 
 	@Override
 	public String[] getUrlMatch() {
-		String[] str = {"points"};
+		String[] str = {"learning_object", "points"};
 		return str;
 	}
 

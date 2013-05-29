@@ -29,6 +29,7 @@ import java.util.List;
 import org.mixare.R.drawable;
 import org.mixare.data.DataSourceList;
 import org.mixare.data.DataSourceStorage;
+import org.mixare.data.convert.Elevation;
 import org.mixare.lib.MixViewInterface;
 import org.mixare.lib.gui.GLParameters;
 import org.mixare.lib.gui.PaintScreen;
@@ -908,6 +909,8 @@ public class MixView extends SherlockActivity implements SensorEventListener,
 		case 6:
 			Location currentGPSInfo = getMixViewData().getMixContext()
 					.getLocationFinder().getCurrentLocation();
+			// getting altitude from geonames webservice (username mixare4glo)
+			currentGPSInfo.setAltitude(Double.parseDouble(((Elevation.getElevation()).calcElevation(currentGPSInfo.getLatitude(), currentGPSInfo.getLongitude()))));
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setMessage(getString(R.string.general_info_text) + "\n\n"
 					+ getString(R.string.longitude)

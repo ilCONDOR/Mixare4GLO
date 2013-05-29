@@ -17,6 +17,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.SpannableString;
@@ -596,10 +597,14 @@ public class MixListView extends SherlockActivity {
 				MarkerInfo markerInfo = ((EntryItem) getItem((Integer) v
 						.getTag())).getMarkerInfo();
 
-				Intent startMap = new Intent(MixListView.this, GoogleMapV2.class);
-				startMap.putExtra("center", true);
-				startMap.putExtra("latitude", markerInfo.getLatitude());
-				startMap.putExtra("longitude", markerInfo.getLongitude());
+				//String geoUriString="geo:"+lat+","+lon+"?q=("+head+")@"+lat+","+lon;
+				String uri = "geo:"+ markerInfo.getLatitude() + "," + markerInfo.getLongitude() + "?q=("+markerInfo.getTitle()+")@"+markerInfo.getLatitude()+","+markerInfo.getLongitude();
+				Intent startMap = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+				startMap.putExtra("zoom", 15);
+				//Intent startMap = new Intent(MixListView.this, GoogleMapV2.class);
+				//startMap.putExtra("center", true);
+				//startMap.putExtra("latitude", markerInfo.getLatitude());
+				//startMap.putExtra("longitude", markerInfo.getLongitude());
 				startActivityForResult(startMap, 76);
 			}
 		};

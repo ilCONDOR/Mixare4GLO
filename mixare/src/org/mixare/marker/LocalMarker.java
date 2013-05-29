@@ -148,14 +148,14 @@ public abstract class LocalMarker implements Marker {
 			if (((POIMarker) this).isDirectionMarker()) {
 				getmGeoLoc().setAltitude(curGPSFix.getAltitude());
 			}
-		} /*else if (type != NavigationMarker.class.getName()) {
+		} else if (type == POIMarker.class.getName()) {
 			if (this.getURL() != null && this.getmGeoLoc().getAltitude() == 0.0) {
 				this.getmGeoLoc().setAltitude(
 						Double.valueOf(Elevation.getElevation().calcElevation(
 								curGPSFix.getLatitude(),
 								curGPSFix.getLongitude())));
 			}
-		}*/
+		}
 
 		// compute the relative position vector from user position to POI
 		// location

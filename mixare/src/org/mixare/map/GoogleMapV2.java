@@ -13,9 +13,13 @@ import org.mixare.marker.POIMarker;
 import org.mixare.MixListView;
 import org.mixare.MixView;
 import org.mixare.DataView;
+import org.mixare.PluginListActivity;
+import org.mixare.PluginLoaderActivity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -159,14 +163,38 @@ public class GoogleMapV2 extends Activity implements OnMapClickListener, OnMarke
     }
 	
 	// open web page of clicked marker
-	public boolean onMarkerClick(Marker marker) {
+	public boolean onMarkerClick(Marker marker) {  
+		marker.showInfoWindow();
+		
+		final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+
+		dialog.setTitle(marker.getTitle());
+		dialog.setMessage("Open WepPage?");
+		dialog.setCancelable(false);
+
 		String URL = marker.getSnippet().toString();
-		String newURL = MixUtils.parseAction(URL);
-				try {
-					dataView.getContext().getWebContentManager().loadWebPage(newURL, context);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		final String newURL = MixUtils.parseAction(URL);
+		dialog.setPositiveButton(R.string.yes,
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface d, int whichButton) {
+						try {
+							dataView.getContext().getWebContentManager().loadWebPage(newURL, context);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						d.dismiss();
+					}
+				});
+
+		dialog.setNegativeButton(R.string.no,
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface d, int whichButton) {
+						d.dismiss();
+					}
+				});
+
+		dialog.show();
+		
 		return true;
 	}
 	
@@ -230,8 +258,9 @@ public class GoogleMapV2 extends Activity implements OnMapClickListener, OnMarke
 	    for (int i=0;i<numberMarkersV1; i++){
 	    	POIMarker testMarker = getMarkerV1(i);
 	        LatLng positionMarker = new LatLng(testMarker.getLatitude(), testMarker.getLongitude());
-	        String URL = testMarker.getURL();
-	    	Marker markerV1 = myMap.addMarker(new MarkerOptions().position(positionMarker).snippet(URL));
+	        String url = testMarker.getURL();
+	        String title = testMarker.getTitle();
+	    	Marker markerV1 = myMap.addMarker(new MarkerOptions().position(positionMarker).snippet(url).title(title));
 	    }
 	}
    

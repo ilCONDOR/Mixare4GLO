@@ -10,7 +10,7 @@ public class Elevation {
 
 	private static Elevation instance;
 	String url = "http://api.geonames.org/";
-	String username = "mixare";
+	String username = "mixare4glo";
 
 	// TODO: better thread management
 	
@@ -50,7 +50,7 @@ public class Elevation {
 
 		String requestUrl = url + "srtm3?lats=" + latString.toString()
 				+ "&lngs=" + lngString.toString() + "&username=" + username;
-//		Log.d("test", requestUrl);
+
 		boolean closeLooper = false;
 		if (Looper.myLooper() == null) {
 			Looper.prepare();

@@ -50,7 +50,7 @@ public class GloPolygonDataProcessor extends DataHandler implements DataProcesso
 
 	@Override
 	public String[] getUrlMatch() {
-		String[] str = {"polygons"};
+		String[] str = {"learning_object_poly", "polygons"};
 		return str;
 	}
 
