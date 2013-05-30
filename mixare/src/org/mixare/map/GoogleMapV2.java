@@ -7,14 +7,13 @@ import java.util.List;
 import java.util.Set;
 
 import org.mixare.R;
+import org.mixare.data.DataSourceList;
 import org.mixare.data.convert.GloPolygonDataProcessor;
 import org.mixare.lib.MixUtils;
 import org.mixare.marker.POIMarker;
 import org.mixare.MixListView;
 import org.mixare.MixView;
 import org.mixare.DataView;
-import org.mixare.PluginListActivity;
-import org.mixare.PluginLoaderActivity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -28,7 +27,6 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -39,9 +37,8 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
-import com.google.android.maps.GeoPoint;
-
 
 
 public class GoogleMapV2 extends Activity implements OnMapClickListener, OnMarkerClickListener{ 
@@ -52,7 +49,9 @@ public class GoogleMapV2 extends Activity implements OnMapClickListener, OnMarke
 	private UiSettings UISettings;
     
 	private GoogleMap myMap;
-	List<PolygonOptions> polygonOptionsList = new ArrayList<PolygonOptions>();
+	private Polygon myPolygon;
+	private String checkedDataSources;
+	private List<Polygon> myPolygonsList = new ArrayList<Polygon>();
 	
 	// creates the activity 
 	protected void onCreate(Bundle savedInstanceState) {
@@ -100,14 +99,26 @@ public class GoogleMapV2 extends Activity implements OnMapClickListener, OnMarke
 	    //drawing the points on map
 	    drawPoints();
 	    
-	    // drawing the polygons on map 
-    	drawPolygons();
+	    // drawing the polygons on map, check whether Polygon data source is selected
+	    DataSourceList dsl = new DataSourceList();
+	    dsl.initializeCheckDataSources();
+	    checkedDataSources = DataSourceList.getDataSourcesStringList();
+	    if(checkedDataSources.contains("Polygons")){
+	    	drawPolygons();
+	    }
 	 }
 
 
 	 // activity lifecycle methods
 	 protected void onResume() {
 		 super.onResume();
+		 
+		 //check if Polygons data source is selected otherwise delete polygons on map
+		 if(!checkedDataSources.contains("Polygons") || !checkedDataSources.contains("GLO Polygon")){
+			 for (int i=0; i<myPolygonsList.size();i++){
+				 myPolygon.remove();
+			 }
+		 }
 	 }
 	 
 	 // avoids that when screen rotates the activity is recreated
@@ -289,12 +300,13 @@ public class GoogleMapV2 extends Activity implements OnMapClickListener, OnMarke
 	
 	// draw polygons with data received from createPolygonOptions()
 	private void drawPolygons(){
-		polygonOptionsList = createPolygonOptionsList();
+		List<PolygonOptions> polygonOptionsList = createPolygonOptionsList();
 		for (int i=0; i<polygonOptionsList.size(); i++){
     		PolygonOptions polygonOptions = polygonOptionsList.get(i);
 		    polygonOptions.strokeColor(Color.RED);
 		    polygonOptions.strokeWidth(5);
-		    myMap.addPolygon(polygonOptions);
+		    myPolygon = myMap.addPolygon(polygonOptions);
+		    myPolygonsList.add(myPolygon);
 	    }
 	}
 }

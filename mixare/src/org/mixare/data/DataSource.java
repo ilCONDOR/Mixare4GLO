@@ -277,11 +277,11 @@ public class DataSource {
 	/* ENUM */
 	
 	public enum TYPE {
-		GloPoint, GloPolygon, MIXARE
+		GloPoint, GloPolygon
 	};
 
 	public enum DISPLAY {
-		CIRCLE_MARKER, NAVIGATION_MARKER, IMAGE_MARKER
+		CIRCLE_MARKER, IMAGE_MARKER
 	};
 
 	public enum BLUR {

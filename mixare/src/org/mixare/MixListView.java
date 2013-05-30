@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.mixare.data.DataHandler;
 import org.mixare.data.DataSource;
+import org.mixare.data.DataSourceList;
 import org.mixare.data.convert.GloPolygonDataProcessor;
 import org.mixare.lib.MixUtils;
 import org.mixare.lib.marker.Marker;
@@ -255,7 +256,10 @@ public class MixListView extends SherlockActivity {
 		
 		
 		// create list of polygons
-		if (ids != null){
+		DataSourceList dsl = new DataSourceList();
+	    dsl.initializeCheckDataSources();
+		String checkedDataSources = DataSourceList.getDataSourcesStringList();
+		if (ids != null && (checkedDataSources.contains("Polygons") || checkedDataSources.contains("GLO Polygon"))){
         for (int k = 0; k < ids.length; k++) {
         	
         	// Check the query
@@ -291,6 +295,9 @@ public class MixListView extends SherlockActivity {
 	    	allEntryItems.add(entry);
 	    	polygonCount++;
         }
+		}
+		else{
+			// do nothing
 		}
         
         if (lastSectionIdPolygons != -1) {

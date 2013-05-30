@@ -85,6 +85,17 @@ public class DataSourceList extends SherlockListActivity {
 		registerForContextMenu(lv);
 	}
 	
+	public void initializeCheckDataSources() {
+
+		int size = DataSourceStorage.getInstance().getSize();
+		// copy the value from shared preference to adapter
+		dataSourceAdapter = new DataSourceAdapter();
+		for (int i = 0; i < size; i++) {
+			dataSourceAdapter.addItem(DataSourceStorage.getInstance()
+					.getDataSource(i));
+		}
+	}
+	
 	@Override
 	protected void onPause() {
 		super.onPause();

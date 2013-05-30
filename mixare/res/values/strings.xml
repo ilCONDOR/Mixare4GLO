@@ -13,10 +13,8 @@
     <string name="NW">NW</string>
     
     <string name="GLO">Geographic Learning Objects</string>
-    <string name="MIXARE">Mixare</string>
   
     <string name="CIRCLE_MARKER">Circles</string>
-    <string name="NAVIGATION_MARKER">Arrows</string>
     <string name="IMAGE_MARKER">Images</string>
     
     <string name="empty_list">Sorry, \nThere is no location information \navailable within this radius.\nPlease try to search in a wider range.</string>

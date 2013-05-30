@@ -188,7 +188,7 @@ public class DataView implements DataViewInterface {
 
 	public void requestData(String url) {
 		DownloadRequest request = new DownloadRequest(new DataSource(
-				"LAUNCHER", url, DataSource.TYPE.MIXARE,
+				"LAUNCHER", url, DataSource.TYPE.GloPoint,
 				DataSource.DISPLAY.CIRCLE_MARKER, true));
 		mixContext.getDataSourceManager().setAllDataSourcesforLauncher(
 				request.getSource());

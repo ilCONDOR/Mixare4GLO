@@ -5,7 +5,6 @@
 	</string-array>
 	<string-array name="displaytypelist">
 		<item>@string/CIRCLE_MARKER</item>
-		<item>@string/NAVIGATION_MARKER</item>
 		<item>@string/IMAGE_MARKER</item>
 	</string-array>
 	<string-array name="blurgps">

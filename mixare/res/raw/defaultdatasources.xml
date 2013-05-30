@@ -28,7 +28,7 @@
         <blur>0</blur>
     </datasource>
     <datasource id="2" >
-        <name>altervista</name>
+        <name>Points</name>
 		<url>http://g3r4.altervista.org/points.gml</url>
 		<type>0</type>
         <display>0</display>
@@ -37,7 +37,7 @@
         <blur>0</blur>
     </datasource>
     <datasource id="3" >
-        <name>altervista</name>
+        <name>Polygons</name>
 		<url>http://g3r4.altervista.org/polygons.gml</url>
 		<type>1</type>
         <display>0</display>
