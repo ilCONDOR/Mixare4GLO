@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.2" icons="true" always-add-relationships="true" generalizations="true" realizations="true" 
+  associations="true" dependencies="true" nesting-relationships="true">  
+  <class id="1" language="java" name="org.mixare.lib.gui.MatrixGrabber" project="mixarelib" 
+    file="/mixarelib/src/org/mixare/lib/gui/MatrixGrabber.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="589" y="551"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="org.mixare.lib.gui.PaintScreen" project="mixarelib" 
+    file="/mixarelib/src/org/mixare/lib/gui/PaintScreen.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="273" y="700"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="org.mixare.lib.gui.Label" project="mixarelib" 
+    file="/mixarelib/src/org/mixare/lib/gui/Label.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="571" y="198"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="org.mixare.lib.gui.Model3D" project="mixarelib" 
+    file="/mixarelib/src/org/mixare/lib/gui/Model3D.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-34" y="471"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <association id="5">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="6" name="grabber"/>      
+      <multiplicity id="7" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="8">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="9" name="models"/>      
+      <multiplicity id="10" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="11">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true"/>    
+    <operations public="true" package="true" protected="true" private="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

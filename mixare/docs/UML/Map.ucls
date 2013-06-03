@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="true" nesting-relationships="true">  
+  <class id="1" language="java" name="org.mixare.map.MixOverlay" project="mixare" 
+    file="/mixare/src/org/mixare/map/GoogleMap.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="182" y="12"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="org.mixare.map.GoogleMap" project="mixare" 
+    file="/mixare/src/org/mixare/map/GoogleMap.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="296" y="1222"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="org.mixare.map.SherlockGoogleMapActivity" project="mixare" 
+    file="/mixare/src/org/mixare/map/SherlockGoogleMapActivity.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="512" y="327"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="org.mixare.map.GoogleMapV2" project="mixare" 
+    file="/mixare/src/org/mixare/map/GoogleMapV2.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="856" y="186"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <association id="5">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="6" name="mixMap"/>      
+      <multiplicity id="7" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="8">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true"/>    
+    <operations public="true" package="true" protected="true" private="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="true" nesting-relationships="true">  
+  <class id="1" language="java" name="org.mixare.data.convert.DataConvertor" project="mixare" 
+    file="/mixare/src/org/mixare/data/convert/DataConvertor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="771" y="-112"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="org.mixare.data.convert.GloPointDataProcessor" project="mixare" 
+    file="/mixare/src/org/mixare/data/convert/GloPointDataProcessor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="417" y="179"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="org.mixare.data.convert.GeoDataProcessorGeoJSON" project="mixare" 
+    file="/mixare/src/org/mixare/data/convert/GeoDataProcessorGeoJSON.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="130" y="233"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <interface id="4" language="java" name="org.mixare.data.convert.DataProcessor" project="mixare" 
+    file="/mixare/src/org/mixare/data/convert/DataProcessor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="291" y="-126"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <class id="5" language="java" name="org.mixare.data.convert.Elevation" project="mixare" 
+    file="/mixare/src/org/mixare/data/convert/Elevation.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1157" y="-84"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="org.mixare.data.convert.GloPolygonDataProcessor" project="mixare" 
+    file="/mixare/src/org/mixare/data/convert/GloPolygonDataProcessor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="772" y="301"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="org.mixare.data.convert.Elevation.Downloader" project="mixare" 
+    file="/mixare/src/org/mixare/data/convert/Elevation.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1157" y="160"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <dependency id="8">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <association id="9">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="10" name="instance"/>      
+      <multiplicity id="11" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="12">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="7"/>  
+  </nesting>  
+  <association id="13">    
+    <bendpoint x="839" y="41"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="14" name="dataProcessors"/>      
+      <multiplicity id="15" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="16">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="17" name="instance"/>      
+      <multiplicity id="18" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="19">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <realization id="20">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <dependency id="21">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <realization id="22">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true"/>    
+    <operations public="true" package="true" protected="true" private="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

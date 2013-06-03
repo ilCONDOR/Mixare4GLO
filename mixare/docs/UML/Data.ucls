@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="true" nesting-relationships="true">  
+  <class id="1" language="java" name="org.mixare.data.AddDataSource" project="mixare" 
+    file="/mixare/src/org/mixare/data/AddDataSource.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="180" y="448"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="org.mixare.data.DataSourceList" project="mixare" 
+    file="/mixare/src/org/mixare/data/DataSourceList.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="597" y="212"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="org.mixare.data.DataSourceStorage" project="mixare" 
+    file="/mixare/src/org/mixare/data/DataSourceStorage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="440" width="382" x="10" y="735"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="org.mixare.data.DataSource" project="mixare" 
+    file="/mixare/src/org/mixare/data/DataSource.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="475" y="1610"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="org.mixare.data.DataHandler" project="mixare" 
+    file="/mixare/src/org/mixare/data/DataHandler.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="175" y="148"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="org.mixare.data.DataSourceList.DataSourceAdapter.ViewHolder" project="mixare" 
+    file="/mixare/src/org/mixare/data/DataSourceList.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="696" y="832"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="org.mixare.data.DataSourceList.DataSourceAdapter" project="mixare" 
+    file="/mixare/src/org/mixare/data/DataSourceList.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="703" y="557"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <association id="8">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="9" name="dataSourceAdapter"/>      
+      <multiplicity id="10" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="11">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="12" name="instance"/>      
+      <multiplicity id="13" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="14">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <nesting id="15">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="7"/>  
+  </nesting>  
+  <association id="16">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="17" name="dataSourceList"/>      
+      <multiplicity id="18" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="19">    
+    <bendpoint x="390" y="463"/>    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <nesting id="20">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="6"/>  
+  </nesting>  
+  <dependency id="21">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="22">    
+    <bendpoint x="451" y="769"/>    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <association id="23">    
+    <bendpoint x="856" y="846"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="24" name="mDataSource"/>      
+      <multiplicity id="25" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="26">    
+    <bendpoint x="493" y="433"/>    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true"/>    
+    <operations public="true" package="true" protected="true" private="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
