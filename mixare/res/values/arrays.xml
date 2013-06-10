@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string-array name="datasourcetypelist">
-		<item>@string/GLO</item>
+		<item>@string/GloPoint</item>
+		<item>@string/GloPolygon</item>
 	</string-array>
 	<string-array name="displaytypelist">
 		<item>@string/CIRCLE_MARKER</item>
-		<item>@string/IMAGE_MARKER</item>
+		<!-- <item>@string/IMAGE_MARKER</item> -->
 	</string-array>
 	<string-array name="blurgps">
 	    <item>@string/none</item>

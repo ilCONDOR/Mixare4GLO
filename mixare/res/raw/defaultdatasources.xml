@@ -9,9 +9,27 @@
         <editable>false</editable>
         <blur>0</blur>
     </datasource>-->
+    <!--<datasource id="0" >
+        <name>Points</name>
+		<url>http://g3r4.altervista.org/points.gml</url>
+		<type>0</type>
+        <display>0</display>
+        <visible>true</visible>
+        <editable>false</editable>
+        <blur>0</blur>
+    </datasource>
+    <datasource id="1" >
+        <name>Polygons</name>
+		<url>http://g3r4.altervista.org/polygons.gml</url>
+		<type>1</type>
+        <display>0</display>
+        <visible>true</visible>
+        <editable>false</editable>
+        <blur>0</blur>
+    </datasource>-->
     <datasource id="0" >
         <name>GLO Point</name>
-		<url>http://glo.inf.unibz.it/cgi-bin/mapserv</url>   <!-- when used change getURLMatch() in GloPolygonParser -->
+		<url>http://glo.inf.unibz.it/cgi-bin/mapserv</url>
 		<type>0</type>
         <display>0</display>
         <visible>true</visible>
@@ -26,24 +44,6 @@
         <visible>true</visible>
         <editable>false</editable>
         <blur>0</blur>
-    </datasource>
-    <datasource id="2" >
-        <name>Points</name>
-		<url>http://g3r4.altervista.org/points.gml</url>
-		<type>0</type>
-        <display>0</display>
-        <visible>true</visible>
-        <editable>false</editable>
-        <blur>0</blur>
-    </datasource>
-    <datasource id="3" >
-        <name>Polygons</name>
-		<url>http://g3r4.altervista.org/polygons.gml</url>
-		<type>1</type>
-        <display>0</display>
-        <visible>true</visible>
-        <editable>false</editable>
-        <blur>0</blur>
-    </datasource>
+    </datasource>-->
 </datasources>
 <!-- IMPORTANT FIRST DATA SOURCE OF POINTS OTHERWISE NOT ALL ARE SHOWN IN AR! WHY? -->
