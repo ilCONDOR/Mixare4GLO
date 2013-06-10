@@ -33,11 +33,11 @@ import org.mixare.lib.reality.PhysicalPlace;
  * @author A. Egal
  */
 public class DataConvertor {
-	
+
 	private List<DataProcessor> dataProcessors = new ArrayList<DataProcessor>();
-	
+
 	private static DataConvertor instance;
-	
+
 	public static DataConvertor getInstance(){
 		if(instance == null){
 			instance = new DataConvertor();
@@ -45,20 +45,20 @@ public class DataConvertor {
 		}
 		return instance;
 	}
-	
+
 	public void clearDataProcessors() {
 		dataProcessors.clear();
 		addDefaultDataProcessors();
 	}
-	
+
 	public void addDataProcessor(DataProcessor dataProcessor){
 		dataProcessors.add(dataProcessor);
 	}
-	
+
 	public void removeDataProcessor(DataProcessor dataProcessor){
 		dataProcessors.remove(dataProcessor);
 	}
-	
+
 	public List<Marker> load(String url, String rawResult, DataSource ds){
 		DataProcessor dataProcessor = searchForMatchingDataProcessors(url, rawResult, ds.getType());
 		try {
@@ -75,7 +75,7 @@ public class DataConvertor {
 		}
 		return null;
 	}
-	
+
 	private DataProcessor searchForMatchingDataProcessors(String url, String rawResult, DataSource.TYPE type){
 		for(DataProcessor dp : dataProcessors){
 			if(dp.matchesRequiredType(type.name())){
@@ -95,7 +95,7 @@ public class DataConvertor {
 		}
 		return null;
 	}
-	
+
 	private void addDefaultDataProcessors(){
 		dataProcessors.add(new GloPointDataProcessor());
 		dataProcessors.add(new GloPolygonDataProcessor());
