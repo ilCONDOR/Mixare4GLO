@@ -26,13 +26,14 @@
 	</string>
 	
 	<string name="menu_item_1">Données</string>
-	<string name="menu_item_2">Plugins</string>
-	<string name="menu_item_3">Vue liste</string>
-	<string name="menu_item_4">Vue carte</string>
-	<string name="menu_item_5">Niveau de zoom</string>
-	<string name="menu_item_6">Recherche</string>
-	<string name="menu_item_7">Info</string>
-	<string name="menu_item_8">License</string>
+	<!--<string name="menu_item_2">Plugins</string>-->
+	<string name="menu_item_2">Vue liste</string>
+	<string name="menu_item_3">Vue carte</string>
+	<string name="menu_item_4">Niveau de zoom</string>
+	<string name="menu_item_5">Recherche</string>
+	<string name="menu_item_6">GPS Info</string>
+	<string name="menu_item_7">License</string>
+	<string name="menu_item_8">Get Data</string>
 	
 	
 	<string name="connection_error_dialog">Désolé, une erreur de connexion est survenue! \nS\'il vous plaît vérifier si vous êtes connecté à Internet.</string>
@@ -65,9 +66,5 @@
 	<string name="map_my_location">Ma Position</string>
 	
 	<string name="map_current_location_click">Ma position actuelle</string>
-	
-	<string name="data_source_change_wikipedia">Changé pour les données Wikipedia</string>
-	<string name="data_source_change_twitter">Changé pour les données Twitter</string>
-	<string name="data_source_change_osm">Changé pour les données OpenStreetMap</string>
 		
 </resources>

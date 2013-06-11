@@ -33,13 +33,14 @@
 	</string>
 	
 	<string name="menu_item_1">Fuente de datos</string>
-	<string name="menu_item_2">Plugins</string>
-	<string name="menu_item_3">Lista</string>
-	<string name="menu_item_4">Mapa</string>
-	<string name="menu_item_5">Zoom</string>
-	<string name="menu_item_6">Búsqueda</string>
-	<string name="menu_item_7">Información</string>
-	<string name="menu_item_8">Licencia</string>
+	<!--<string name="menu_item_2">Plugins</string>-->
+	<string name="menu_item_2">Lista</string>
+	<string name="menu_item_3">Mapa</string>
+	<string name="menu_item_4">Zoom</string>
+	<string name="menu_item_5">Búsqueda</string>
+	<string name="menu_item_6">GPS Información</string>
+	<string name="menu_item_7">Licencia</string>
+	<string name="menu_item_8">Get Data</string>
 	
 	
 	<string name="connection_error_dialog">Ha ocurrido un error de conexión! \nPor favor chequea si estas conectado a Internet.</string>
@@ -73,11 +74,7 @@
 	
 	<string name="map_current_location_click">Tu localización actual</string>
 	
-	<string name="data_source_change_wikipedia">Se ha cambiado a Wikipedia como fuente de datos</string>
-	<string name="data_source_change_twitter">Se ha cambiado a Twitter como fuente de datos</string>
-	
 	<string name="search_failed_notification">No hay resultados de búsqueda</string>
-	<string name="source_openstreetmap">estaciones de tren en la zona</string>
 	
 	<string name="search_active_1">Search on data source</string>
 	<string name="search_active_2">. Touch to terminate search</string>

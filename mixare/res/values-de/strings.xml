@@ -31,13 +31,14 @@
 	</string>
 	
 	<string name="menu_item_1">Datenquelle</string>
-	<string name="menu_item_2">Plugins</string>
-	<string name="menu_item_3">Listenansicht</string>
-	<string name="menu_item_4">Karte</string>
-	<string name="menu_item_5">Radius</string>
-	<string name="menu_item_6">Suche</string>
-	<string name="menu_item_7">Info</string>
-	<string name="menu_item_8">Lizenz</string>
+	<!--<string name="menu_item_2">Plugins</string>-->
+	<string name="menu_item_2">Listenansicht</string>
+	<string name="menu_item_3">Karte</string>
+	<string name="menu_item_4">Radius</string>
+	<string name="menu_item_5">Suche</string>
+	<string name="menu_item_6">GPS Info</string>
+	<string name="menu_item_7">Lizenz</string>
+	<string name="menu_item_8">Get Data</string>
 	
 	<string name="connection_error_dialog">Es tut uns leid, Verbindungsfehler ist aufgetreten! \nBitte kontrollieren Sie ob eine Verbindung zum Internet besteht.</string>
 	<string name="connection_error_dialog_button1">Erneut Versuchen</string>
@@ -70,12 +71,7 @@
 	
 	<string name="map_current_location_click">Dein Standort</string>
 	
-	<string name="data_source_change_wikipedia">Wikipedia wurde als Datenquelle gewählt</string>
-	<string name="data_source_change_twitter">Twitter wurde als Datenquelle gewählt</string>
-	<string name="data_source_change_osm">OpenStreetMap wurde als Datenquelle gewählt</string>
-	
 	<string name="search_failed_notification">Keine Suchergebnisse gefunden</string>
-	<string name="source_openstreetmap">Bahnhöfe in der Umgebung</string>
 	
 	<string name="search_active_1">Suche in der Datenquelle</string>
 	<string name="search_active_2">. Hier klicken um die Suche zu Beenden</string>

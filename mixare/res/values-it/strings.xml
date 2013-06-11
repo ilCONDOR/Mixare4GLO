@@ -12,11 +12,7 @@
     <string name="W">O</string>
     <string name="NW">NO</string>
     
-    <string name="OSM">Openstreetmap</string>
-    <string name="MIXARE">Mixare</string>
-    
     <string name="CIRCLE_MARKER">Cerchi</string>
-    <string name="NAVIGATION_MARKER">Frecce</string>
     
     <string name="empty_list">Purtroppo non sono disponibili informazioni\nin quest\'area. Provare ad aumentare il raggio.</string>
 	<string name="option_not_available">Questa opzione sará disponibile in\nuna versione futura dell\'applicazione!</string>
@@ -33,13 +29,14 @@
 	</string>
 	
 	<string name="menu_item_1">Scelta delle fonti</string>
-	<string name="menu_item_2">Plugins</string>
-	<string name="menu_item_3">Lista dei risultati</string>
-	<string name="menu_item_4">Mappa</string>
-	<string name="menu_item_5">Raggio visualizzato</string>
-	<string name="menu_item_6">Ricerca</string>
-	<string name="menu_item_7">Info</string>
-	<string name="menu_item_8">Licenza</string>
+	<!--<string name="menu_item_2">Plugins</string>-->
+	<string name="menu_item_2">Lista dei risultati</string>
+	<string name="menu_item_3">Mappa</string>
+	<string name="menu_item_4">Raggio visualizzato</string>
+	<string name="menu_item_5">Ricerca</string>
+	<string name="menu_item_6">GPS Info</string>
+	<string name="menu_item_7">Licenza</string>
+	<string name="menu_item_8">Get Data</string>
 
 	<string name="cancel">Annulla</string>
 
@@ -79,22 +76,14 @@
 	<string name="data_source_add">Aggiungi sorgente dati</string>
 	<string name="data_source_edit">Modifica sorgente dati</string>
 	<string name="data_source_delete">Rimuovi sorgente dati</string>
-	<string name="data_source_change_wikipedia">Vengono mostrati dati da Wikipedia</string>
-	<string name="data_source_change_twitter">Vengono mostrati dati da Twitter</string>
-	<string name="data_source_change_osm">Vengono mostrati dati da OpenStreetMap</string>
 	
 	<string name="search_failed_notification">Nessun risultato di ricerca</string>
-	<string name="source_openstreetmap">Stazioni nei dintorni</string>
 	
 	<string name="search_active_1">Ricerca nella fonte dei dati di</string>
 	<string name="search_active_2">. Clicca qui per terminare la ricerca</string>
 	<string name="download_error">Errore nella fase di aggiornamento dati</string>
 	<string name="download_received">Dati aggiornati da </string>
 
-	<string name="add_osm_menu">Aggiungi OpenStreetMap URL</string>
-	<string name="insert_osm_url">Inserici OpenStreetMap URL</string>
-	<string name="osm_max_object_menu">Inposta il massimo numero di punti di interesse per URL</string>
-	<string name="set_osm_max_object">Massimo numero di punti di interesse per URL</string>
 	<string name="location_not_found">Posizione non stabilita, assicurarsi di aver abilitato la geolocalizzazione tramite Wifi o GPS.</string>
 	<string name="refreshing">Aggiornamento</string>
 
